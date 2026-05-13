@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop - ArdCom Electronics</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <a href="../Landing.html" class="brand-logo">
+      <img src="../Source Image/Landing/ardcom-logo.png" alt="ArdCom Electronics Logo" />
+    </a>
+
+    <div style="flex: 1; display: flex; justify-content: center;">
+      <div class="search-container" style="margin: 0; max-width: 600px; width: 100%;">
+        <div class="search-input-wrapper">
+          <input type="text" id="mainSearchInput" placeholder="Search" autocomplete="off" />
+          <div class="search-suggestions" id="searchSuggestions"></div>
+        </div>
+        <button id="mainSearchBtn" aria-label="Search">&#128269;</button>
+      </div>
+    </div>
+
+    <nav class="navigation-links" aria-label="Primary navigation">
+      <a href="../Landing.html">Home</a>
+      <a href="Shopping.html" class="active">Shop</a>
+      <a href="#book">Book</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="header-action-button" aria-label="Shopping cart">&#128722;</button>
+      <button class="header-action-button" aria-label="User account">&#128100;</button>
+    </div>
+  </header>
+
+  <!-- Best Selling Section with Categories -->
+  <section class="best-selling-section">
+    <div class="best-selling-container">
+      <!-- Best Selling Hero -->
+      <div class="best-selling-hero" id="bestSellingHero">
+        <img
+          id="bestSellingImage"
+          alt="Best selling product"
+          class="best-selling-image"
+        >
+        <div class="best-selling-content">
+          <h1 class="best-selling-headline">Best<br>Selling</h1>
+        </div>
+      </div>
+
+      <!-- Category Grid -->
+      <div class="category-grid-section" id="categoryGrid"></div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <main class="products-section">
+    <div class="products-grid" id="productsGrid"></div>
+  </main>
+  <script src="../script.js" defer></script>
+</body>
+</html>
