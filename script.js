@@ -525,12 +525,13 @@ function assetPath(path) {
 }
 
 function isProductSearchPage() {
-  return decodeURIComponent(window.location.pathname).endsWith("/Product Search.html") ||
-    decodeURIComponent(window.location.pathname).endsWith("\\Product Search.html");
+  const pathname = decodeURIComponent(window.location.pathname).toLowerCase();
+  return pathname.endsWith("/product search.html") ||
+    pathname.endsWith("\\product search.html");
 }
 
 function isInPagesFolder() {
-  return /\/Pages\/|\\Pages\\/i.test(decodeURIComponent(window.location.pathname));
+  return /\/pages\/|\\pages\\/i.test(decodeURIComponent(window.location.pathname));
 }
 
 function escapeHTML(value) {
