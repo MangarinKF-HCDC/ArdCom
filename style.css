@@ -1,1139 +1,461 @@
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Libre+Baskerville:ital@0;1&display=swap');
+/**
+ * Shared ArdCom Electronics page scripts.
+ * All page behavior is initialized from here so the HTML stays markup-only.
+ */
+const allProducts = [
+  { category: "Vendo Machines", bestSelling: true, name: "ArdCom WiFi Vending Machine", price: "₱ 4,500.00", image1: "Source Image/Shop/Vendo Machines/ArdCom WiFi Vending Machine/1.jpg", image2: "Source Image/Shop/Vendo Machines/ArdCom WiFi Vending Machine/2.jpg", details: "Smart WiFi-enabled vending machine for convenient automated sales." },
+  { category: "Shot Clocks", bestSelling: true, name: "ArdCom Wireless Basketball Shotclocks", price: "₱ 9,750.00", image1: "Source Image/Shop/Shot Clocks/ArdCom Wireless Basketball Shotclocks/1.png", image2: "Source Image/Shop/Shot Clocks/ArdCom Wireless Basketball Shotclocks/2.webp", details: "Wireless shot clock system for basketball games and training." },
+  { category: "Computer Sets", bestSelling: true, name: "Ryzen 5 5600G Computer Set", price: "₱ 25,000.00", image1: "Source Image/Shop/Computer Sets/Ryzen 5 5600G Computer Set/1.jpg", image2: "Source Image/Shop/Computer Sets/Ryzen 5 5600G Computer Set/2.jpg", details: "Complete desktop PC set powered by AMD Ryzen 5 5600G processor." },
+  { category: "Computer Sets", bestSelling: true, name: "Ryzen 7 5700G Computer Set", price: "₱ 35,000.00", image1: "Source Image/Shop/Computer Sets/Ryzen 7 5700G Computer Set/1.jpg", image2: "Source Image/Shop/Computer Sets/Ryzen 7 5700G Computer Set/2.jpg", details: "High-performance PC set with AMD Ryzen 7 5700G for multitasking and gaming." },
+  { category: "Computer Sets", name: "Ryzen 9 5900X Computer Set", price: "₱ 50,000.00", image1: "Source Image/Shop/Computer Sets/Ryzen 9 5900X Computer Set/1.jpg", image2: "Source Image/Shop/Computer Sets/Ryzen 9 5900X Computer Set/2.webp", details: "Premium PC set featuring the powerful AMD Ryzen 9 5900X processor." },
+  { category: "Computer Sets", bestSelling: true, name: "Intel i3 12100 Computer Set", price: "₱ 20,000.00", image1: "Source Image/Shop/Computer Sets/Intel i3 12100 Computer Set/1.jpg", image2: "Source Image/Shop/Computer Sets/Intel i3 12100 Computer Set/2.jpg", details: "Affordable desktop set with Intel Core i3 12100 for everyday use." },
+  { category: "Computer Sets", name: "Intel i5 12400 Computer Set", price: "₱ 30,000.00", image1: "Source Image/Shop/Computer Sets/Intel i5 12400 Computer Set/1.jpg", image2: "Source Image/Shop/Computer Sets/Intel i5 12400 Computer Set/2.webp", details: "Versatile PC set with Intel Core i5 12400 for work and play." },
+  { category: "Computer Sets", name: "Intel i7 12700 Computer Set", price: "₱ 40,000.00", image1: "Source Image/Shop/Computer Sets/Intel i7 12700 Computer Set/1.jpg", image2: "Source Image/Shop/Computer Sets/Intel i7 12700 Computer Set/2.jpg", details: "Powerful desktop set with Intel Core i7 12700 for demanding tasks." },
+  { category: "Computer Case", name: "Lian Li PC-O11 Dynamic EVO", price: "₱ 7,500.00", image1: "Source Image/Shop/Computer Case/Lian Li PC-O11 Dynamic EVO/1.webp", image2: "Source Image/Shop/Computer Case/Lian Li PC-O11 Dynamic EVO/2.webp", details: "Premium mid-tower case with modular design and tempered glass panels." },
+  { category: "Computer Case", name: "Inplay PC Case", price: "₱ 3,500.00", image1: "Source Image/Shop/Computer Case/Inplay PC Case/1.webp", image2: "Source Image/Shop/Computer Case/Inplay PC Case/2.jpg", details: "Durable and stylish PC case for custom desktop builds." },
+  { category: "Computer Case", name: "Inplay PC Case with RGB", price: "₱ 4,500.00", image1: "Source Image/Shop/Computer Case/Inplay PC Case with RGB/1.jpg", image2: "Source Image/Shop/Computer Case/Inplay PC Case with RGB/2.jpg", details: "PC case featuring vibrant RGB lighting for a modern look." },
+  { category: "Computer Fan", name: "Noctua NF-A12x25", price: "₱ 1,500.00", image1: "Source Image/Shop/Computer Fan/Noctua NF-A12x25/1.jpg", image2: "Source Image/Shop/Computer Fan/Noctua NF-A12x25/2.jpg", details: "High-performance 120mm cooling fan with quiet operation." },
+  { category: "Computer Fan", name: "Corsair LL120 RGB", price: "₱ 2,000.00", image1: "Source Image/Shop/Computer Fan/Corsair LL120 RGB/1.jpg", image2: "Source Image/Shop/Computer Fan/Corsair LL120 RGB/2.jpg", details: "120mm RGB fan for enhanced cooling and customizable lighting." },
+  { category: "Computer Fan", name: "Cooler Master MasterFan MF120R ARGB", price: "₱ 1,800.00", image1: "Source Image/Shop/Computer Fan/Cooler Master MasterFan MF120R ARGB/1.jpg", image2: "Source Image/Shop/Computer Fan/Cooler Master MasterFan MF120R ARGB/2.jpg", details: "ARGB cooling fan for efficient airflow and vivid lighting effects." },
+  { category: "Computer Fan", name: "Cooler Master MasterFan MF120R ARGB 3 Pack", price: "₱ 5,000.00", image1: "Source Image/Shop/Computer Fan/Cooler Master MasterFan MF120R ARGB 3 Pack/1.webp", image2: "Source Image/Shop/Computer Fan/Cooler Master MasterFan MF120R ARGB 3 Pack/2.jpg", details: "Set of three ARGB fans for advanced PC cooling and aesthetics." },
+  { category: "Computer Fan", name: "Inplay PC Fan with RGB", price: "₱ 1,500.00", image1: "Source Image/Shop/Computer Fan/Inplay PC Fan with RGB/1.jpg", image2: "Source Image/Shop/Computer Fan/Inplay PC Fan with RGB/2.webp", details: "RGB cooling fan for desktop computers with quiet performance." },
+  { category: "Computer Fan", name: "Inplay PC Fan 3 Pack with RGB", price: "₱ 4,000.00", image1: "Source Image/Shop/Computer Fan/Inplay PC Fan 3 Pack with RGB/1.jpg", image2: "Source Image/Shop/Computer Fan/Inplay PC Fan 3 Pack with RGB/2.webp", details: "Triple pack of RGB fans for enhanced cooling and lighting." },
+  { category: "Laptops", bestSelling: true, name: "Lenovo IdeaPad 3 15ITL6", price: "₱ 25,000.00", image1: "Source Image/Shop/Laptops/Lenovo IdeaPad 3 15ITL6/1.jpg", image2: "Source Image/Shop/Laptops/Lenovo IdeaPad 3 15ITL6/2.avif", details: "15-inch Lenovo laptop with Intel processor for productivity and study." },
+  { category: "Laptops", name: "Lenovo IdeaPad 3 14ITL6", price: "₱ 20,000.00", image1: "Source Image/Shop/Laptops/Lenovo IdeaPad 3 14ITL6/1.jpg", image2: "Source Image/Shop/Laptops/Lenovo IdeaPad 3 14ITL6/2.png", details: "Compact 14-inch Lenovo laptop ideal for work and travel." },
+  { category: "Laptops", bestSelling: true, name: "Asus VivoBook 15 X515EA", price: "₱ 30,000.00", image1: "Source Image/Shop/Laptops/Asus VivoBook 15 X515EA/1.jpg", image2: "Source Image/Shop/Laptops/Asus VivoBook 15 X515EA/2.webp", details: "Sleek Asus VivoBook with 15-inch display and fast performance." },
+  { category: "Laptops", bestSelling: true, name: "HP 15s-fq2716TU", price: "₱ 28,000.00", image1: "Source Image/Shop/Laptops/HP 15s-fq2716TU/1.jpg", image2: "Source Image/Shop/Laptops/HP 15s-fq2716TU/2.jpg", details: "HP 15-inch laptop with reliable performance for daily tasks." },
+  { category: "Memory", name: "Corsair Vengeance LPX 16GB (2x8GB) DDR4 3200MHz", price: "₱ 4,000.00", image1: "Source Image/Shop/Memory/Corsair Vengeance LPX 16GB (2x8GB) DDR4 3200MHz/1.jpg", image2: "Source Image/Shop/Memory/Corsair Vengeance LPX 16GB (2x8GB) DDR4 3200MHz/2.avif", details: "High-speed 16GB DDR4 memory kit for gaming and multitasking." },
+  { category: "Memory", name: "G.Skill Ripjaws V 16GB (2x8GB) DDR4 3200MHz", price: "₱ 4,500.00", image1: "Source Image/Shop/Memory/G.Skill Ripjaws V 16GB (2x8GB) DDR4 3200MHz/1.jpg", image2: "Source Image/Shop/Memory/G.Skill Ripjaws V 16GB (2x8GB) DDR4 3200MHz/2.jpg", details: "Performance DDR4 memory kit for enhanced PC responsiveness." },
+  { category: "Memory", name: "Team T-Force Vulcan Z 16GB (2x8GB) DDR4 3200MHz", price: "₱ 3,500.00", image1: "Source Image/Shop/Memory/Team T-Force Vulcan Z 16GB (2x8GB) DDR4 3200MHz/1.jpg", image2: "Source Image/Shop/Memory/Team T-Force Vulcan Z 16GB (2x8GB) DDR4 3200MHz/2.jpg", details: "Durable and efficient DDR4 RAM kit for desktop upgrades." },
+  { category: "Motherboard", name: "ASUS Prime B550M-A WiFi", price: "₱ 7,000.00", image1: "Source Image/Shop/Motherboard/ASUS Prime B550M-A WiFi/1.png", image2: "Source Image/Shop/Motherboard/ASUS Prime B550M-A WiFi/2.jpg", details: "Micro-ATX motherboard with WiFi and robust connectivity options." },
+  { category: "Motherboard", name: "ASUS TUF Gaming B550M-PLUS WiFi", price: "₱ 8,000.00", image1: "Source Image/Shop/Motherboard/ASUS TUF Gaming B550M-PLUS WiFi/1.jpg", image2: "Source Image/Shop/Motherboard/ASUS TUF Gaming B550M-PLUS WiFi/2.png", details: "Durable gaming motherboard with WiFi and advanced features." },
+  { category: "Motherboard", name: "Gigabyte A550M S2H", price: "₱ 6,000.00", image1: "Source Image/Shop/Motherboard/Gigabyte A550M S2H/1.jpg", image2: "Source Image/Shop/Motherboard/Gigabyte A550M S2H/2.png", details: "Affordable micro-ATX motherboard for reliable PC builds." },
+  { category: "Motherboard", name: "MSI B550M PRO-VDH WIFI", price: "₱ 7,500.00", image1: "Source Image/Shop/Motherboard/MSI B550M PRO-VDH WIFI/1.jpg", image2: "Source Image/Shop/Motherboard/MSI B550M PRO-VDH WIFI/2.webp", details: "Professional-grade motherboard with built-in WiFi and stability." },
+  { category: "PC Accessories", name: "Logitech G502 HERO", price: "₱ 2,500.00", image1: "Source Image/Shop/PC Accessories/Logitech G502 HERO/1.jpg", image2: "Source Image/Shop/PC Accessories/Logitech G502 HERO/2.webp", details: "High-precision gaming mouse with customizable buttons." },
+  { category: "PC Accessories", name: "Razer DeathAdder V2", price: "₱ 3,000.00", image1: "Source Image/Shop/PC Accessories/Razer DeathAdder V2/1.jpg", image2: "Source Image/Shop/PC Accessories/Razer DeathAdder V2/2.jpg", details: "Ergonomic gaming mouse designed for speed and accuracy." },
+  { category: "PC Accessories", name: "Logitech Headset G432", price: "₱ 2,000.00", image1: "Source Image/Shop/PC Accessories/Logitech Headset G432/1.jpg", image2: "Source Image/Shop/PC Accessories/Logitech Headset G432/2.webp", details: "Surround sound gaming headset for immersive audio." },
+  { category: "PC Accessories", name: "Inplay Gaming Headset", price: "₱ 1,500.00", image1: "Source Image/Shop/PC Accessories/Inplay Gaming Headset/1.webp", image2: "Source Image/Shop/PC Accessories/Inplay Gaming Headset/2.webp", details: "Comfortable headset for gaming and multimedia use." },
+  { category: "PC Accessories", name: "Inplay Gaming Mouse Pad", price: "₱ 500.00", image1: "Source Image/Shop/PC Accessories/Inplay Gaming Mouse Pad/1.jpg", image2: "Source Image/Shop/PC Accessories/Inplay Gaming Mouse Pad/2.jpg", details: "Large mouse pad for smooth and precise mouse movement." },
+  { category: "PC Accessories", name: "Inplay Gaming Mouse Pad with RGB", price: "₱ 1,000.00", image1: "Source Image/Shop/PC Accessories/Inplay Gaming Mouse Pad with RGB/1.jpg", image2: "Source Image/Shop/PC Accessories/Inplay Gaming Mouse Pad with RGB/2.jpg", details: "RGB mouse pad for enhanced gaming aesthetics." },
+  { category: "Processor", name: "AMD Ryzen 5 5600G", price: "₱ 12,000.00", image1: "Source Image/Shop/Processor/AMD Ryzen 5 5600G/1.jpg", image2: "Source Image/Shop/Processor/AMD Ryzen 5 5600G/2.webp", details: "6-core AMD Ryzen processor for fast and efficient computing." },
+  { category: "Processor", name: "AMD Ryzen 7 5700G", price: "₱ 18,000.00", image1: "Source Image/Shop/Processor/AMD Ryzen 7 5700G/1.jpg", image2: "Source Image/Shop/Processor/AMD Ryzen 7 5700G/2.jpg", details: "8-core AMD Ryzen processor for high-performance tasks." },
+  { category: "Processor", name: "AMD Ryzen 9 5900X", price: "₱ 30,000.00", image1: "Source Image/Shop/Processor/AMD Ryzen 9 5900X/1.jpg", image2: "Source Image/Shop/Processor/AMD Ryzen 9 5900X/2.jpg", details: "12-core AMD Ryzen processor for extreme multitasking and gaming." },
+  { category: "Processor", name: "Intel i3 12100", price: "₱ 10,000.00", image1: "Source Image/Shop/Processor/Intel i3 12100/1.webp", image2: "Source Image/Shop/Processor/Intel i3 12100/2.jpg", details: "Entry-level Intel Core i3 processor for everyday computing." },
+  { category: "Processor", name: "Intel i5 12400", price: "₱ 15,000.00", image1: "Source Image/Shop/Processor/Intel i5 12400/1.jpg", image2: "Source Image/Shop/Processor/Intel i5 12400/2.jpg", details: "Mid-range Intel Core i5 processor for balanced performance." },
+  { category: "Processor", name: "Intel i7 12700", price: "₱ 25,000.00", image1: "Source Image/Shop/Processor/Intel i7 12700/1.jpg", image2: "Source Image/Shop/Processor/Intel i7 12700/2.jpg", details: "High-end Intel Core i7 processor for demanding applications." },
+  { category: "Storage", name: "Western Digital Blue 1TB HDD", price: "₱ 2,500.00", image1: "Source Image/Shop/Storage/Western Digital Blue 1TB HDD/1.jpg", image2: "Source Image/Shop/Storage/Western Digital Blue 1TB HDD/2.png", details: "Reliable 1TB HDD for desktop storage and backups." },
+  { category: "Storage", name: "Seagate Barracuda 2TB HDD", price: "₱ 3,500.00", image1: "Source Image/Shop/Storage/Seagate Barracuda 2TB HDD/1.webp", image2: "Source Image/Shop/Storage/Seagate Barracuda 2TB HDD/2.jpg", details: "High-capacity 2TB HDD for storing large files and media." },
+  { category: "Storage", name: "Samsung 970 EVO Plus 500GB NVMe SSD", price: "₱ 4,000.00", image1: "Source Image/Shop/Storage/Samsung 970 EVO Plus 500GB NVMe SSD/1.jpg", image2: "Source Image/Shop/Storage/Samsung 970 EVO Plus 500GB NVMe SSD/2.avif", details: "Fast 500GB NVMe SSD for rapid data access and boot times." },
+  { category: "Storage", name: "Crucial P5 1TB NVMe SSD", price: "₱ 6,000.00", image1: "Source Image/Shop/Storage/Crucial P5 1TB NVMe SSD/1.jpg", image2: "Source Image/Shop/Storage/Crucial P5 1TB NVMe SSD/2.webp", details: "1TB NVMe SSD for high-speed storage and performance." },
+  { category: "Storage", name: "Ramsta 256GB SSD", price: "₱ 1,500.00", image1: "Source Image/Shop/Storage/Ramsta 256GB SSD/1.jpg", image2: "Source Image/Shop/Storage/Ramsta 256GB SSD/2.webp", details: "Compact 256GB SSD for quick system upgrades." },
+  { category: "Television", bestSelling: true, name: "NVision 43\" 4K UHD TV", price: "₱ 15,000.00", image1: "Source Image/Shop/Television/NVision 43 inch 4K UHD TV/1.png", image2: "Source Image/Shop/Television/NVision 43 inch 4K UHD TV/2.webp", details: "43-inch 4K UHD smart TV for immersive home entertainment." },
+  { category: "Monitor", bestSelling: true, name: "LG 24MP59G 24\" Gaming Monitor", price: "₱ 7,000.00", image1: "Source Image/Shop/Monitor/LG 24MP59G 24 inch Gaming Monitor/1.jpg", image2: "Source Image/Shop/Monitor/LG 24MP59G 24 inch Gaming Monitor/2.jpg", details: "24-inch LG gaming monitor with fast refresh rate and vivid colors." },
+  { category: "Monitor", bestSelling: true, name: "Inplay 24\" Gaming Monitor", price: "₱ 5,000.00", image1: "Source Image/Shop/Monitor/Inplay 24 inch Gaming Monitor/1.jpg", image2: "Source Image/Shop/Monitor/Inplay 24 inch Gaming Monitor/2.jpg", details: "24-inch Inplay monitor designed for smooth gaming visuals." },
+  { category: "Monitor", bestSelling: true, name: "Inplay 27\" Gaming Monitor", price: "₱ 7,000.00", image1: "Source Image/Shop/Monitor/Inplay 27 inch Gaming Monitor/1.jpg", image2: "Source Image/Shop/Monitor/Inplay 27 inch Gaming Monitor/2.jpg", details: "27-inch Inplay gaming monitor for immersive gameplay experience." }
+];
 
-:root {
-  --bg-color: #ececec;
-  --panel-color: #d9d5ff;
-  --text-color: #111;
-  --muted-color: #444;
-  --primary-color: #6f66e3;
-  --button-color: #c3bdf9;
-  --button-text: #2b265a;
-  font-family: 'Libre Baskerville', serif;
+document.addEventListener("DOMContentLoaded", () => {
+  initScrollReveal();
+  initSearchBox();
+  initShoppingPage();
+  initProductSearchPage();
+});
+
+function initScrollReveal() {
+  if (!("IntersectionObserver" in window)) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add("active");
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll("section, .page-content > div").forEach((section) => {
+    section.classList.add("reveal-seam");
+    observer.observe(section);
+  });
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Abril Fatface', serif;
+function initSearchBox() {
+  const searchInput = document.getElementById("mainSearchInput") || document.getElementById("searchInput");
+  const searchBtn = document.getElementById("mainSearchBtn") || document.getElementById("searchBtn");
+  const suggestionsPanel = document.getElementById("searchSuggestions");
+
+  if (!searchInput || !suggestionsPanel) return;
+
+  searchInput.addEventListener("input", () => renderSuggestions(searchInput.value, suggestionsPanel));
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") handleSearchSubmit(searchInput.value);
+  });
+
+  searchBtn?.addEventListener("click", () => handleSearchSubmit(searchInput.value));
+
+  suggestionsPanel.addEventListener("click", (event) => {
+    const suggestion = event.target.closest(".search-suggestion-item");
+    if (!suggestion) return;
+
+    const value = suggestion.dataset.value;
+    const type = suggestion.dataset.type;
+    searchInput.value = value;
+    suggestionsPanel.classList.remove("show");
+
+    if (isProductSearchPage()) {
+      renderSearchResults(value, type);
+    } else {
+      goToProductSearch(value);
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest(".search-container")) {
+      suggestionsPanel.classList.remove("show");
+    }
+  });
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+function initShoppingPage() {
+  const grid = document.getElementById("productsGrid");
+  if (!grid || isProductSearchPage()) return;
 
-body {
-  background: var(--bg-color);
-  color: var(--text-color);
-  line-height: 1.6;
-}
+  // Initialize shopping page with all products
+  renderShoppingProducts(allProducts);
+  displayBestSellingImage();
+  renderCategoryGrid();
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  // Setup category button event listeners
+  document.querySelectorAll(".category-button").forEach((button) => {
+    button.addEventListener("click", function() {
+      // Extract category name from the text span (excluding emoji icon)
+      const category = this.querySelector('.category-button-text')?.textContent.trim();
+      if (category) {
+        goToProductSearch(category);
+      }
+    });
+  });
 
-/* Header */
-header.site-header {
-  width: 100%;
-  padding: 20px 40px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.95);
-  position: relative;
-  z-index: 10;
-  gap: 24px;
-}
+  // Setup best-selling hero click
+  document.getElementById("bestSellingHero")?.addEventListener("click", () => {
+    goToProductSearch("Best Selling");
+  });
 
-.brand-logo {
-  display: flex;
-  align-items: center;
-}
+  // Setup search input for shopping page
+  const searchInput = document.querySelector(".search-container input");
+  if (searchInput) {
+    searchInput.addEventListener("input", function() {
+      const query = this.value.trim().toLowerCase();
+      const searchSuggestions = document.getElementById("searchSuggestions");
+      
+      if (query.length === 0) {
+        searchSuggestions.classList.remove("show");
+        return;
+      }
 
-.brand-logo img {
-  width: 100px;
-  height: auto;
-  object-fit: contain;
-}
+      const categories = [...new Set(allProducts.map(p => p.category))];
+      const matchingCategories = categories.filter(cat => cat.toLowerCase().includes(query));
+      const matchingProducts = allProducts.filter(product => product.name.toLowerCase().includes(query));
 
-.navigation-links {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  gap: 32px;
-  font-size: 0.95rem;
-  color: var(--muted-color);
-}
+      let suggestionsHTML = '';
 
-.navigation-links a {
-  transition: color 0.2s ease;
-}
+      if (matchingCategories.length > 0) {
+        suggestionsHTML += matchingCategories.map(category => `
+          <div class="search-suggestion-item category-suggestion" onclick="goToProductSearch('${escapeAttribute(category)}')">
+            <div class="suggestion-name">${escapeHTML(category)}</div>
+          </div>
+        `).join('');
+      }
 
-.navigation-links a:hover {
-  color: var(--primary-color);
-}
+      if (matchingProducts.length > 0) {
+        suggestionsHTML += matchingProducts.map(product => `
+          <div class="search-suggestion-item product-suggestion" onclick="goToProductSearch('${escapeAttribute(product.name)}')">
+            <div class="suggestion-name">${escapeHTML(product.name)}</div>
+          </div>
+        `).join('');
+      }
 
-.navigation-links a.active {
-  background: var(--button-color);
-  color: #4a3f9f;
-  padding: 8px 16px;
-  border-radius: 20px;
-}
+      if (suggestionsHTML === '') {
+        searchSuggestions.classList.remove("show");
+        return;
+      }
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.header-action-button {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  border: 1px solid rgba(111, 102, 227, 0.2);
-  display: grid;
-  place-items: center;
-  background: white;
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: background 0.2s ease;
-}
-
-.header-action-button:hover {
-  background: #f5f5f5;
-}
-
-/* Innovations Banner Section */
-.innovations-banner {
-  min-height: 80vh;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(97, 97, 97, 0.7)),
-              url('Source Image/Landing/ardcom-branches.jpg') right center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  padding: 60px 40px;
-}
-
-.innovations-banner-content {
-  max-width: 550px;
-}
-
-.innovations-headline {
-  font-size: 3.5rem;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  margin-bottom: 40px;
-  text-transform: uppercase;
-  color: #000;
-}
-
-.innovations-cta-group {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.innovations-cta-button {
-  padding: 14px 28px;
-  border-radius: 12px;
-  border: none;
-  font-weight: 700;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.innovations-cta-button.shop-now {
-  background: var(--button-color);
-  color: var(--button-text);
-}
-
-.innovations-cta-button.book-session {
-  background: var(--button-color);
-  color: var(--button-text);
-}
-
-.innovations-cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(111, 102, 227, 0.2);
-}
-
-/* Main Content */
-main.page-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 60px 40px;
-  background: var(--bg-color);
-}
-
-/* Vendo Machine Section */
-.vendo-machine-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-  margin-bottom: 80px;
-}
-
-.vendo-machine-showcase {
-  padding: 40px;
-  background: var(--panel-color);
-  border-radius: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 400px;
-  box-shadow: 0 20px 50px rgba(30, 35, 90, 0.1);
-}
-
-.vendo-machine-showcase img {
-  width: 100%;
-  max-width: 280px;
-  height: auto;
-  object-fit: contain;
-}
-
-.vendo-machine-details {
-  padding: 20px 0;
-}
-
-.vendo-machine-title {
-  font-size: 2.5rem;
-  font-weight: 900;
-  margin-bottom: 24px;
-  line-height: 1.2;
-}
-
-.vendo-machine-description {
-  color: var(--muted-color);
-  font-size: 1rem;
-  margin-bottom: 32px;
-  line-height: 1.7;
-}
-
-.vendo-machine-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 28px;
-  border-radius: 12px;
-  background: var(--button-color);
-  color: var(--button-text);
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.vendo-machine-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(111, 102, 227, 0.2);
-}
-
-/* Shot Clock Section */
-.shot-clock-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-  background: white;
-  padding: 60px;
-  border-radius: 32px;
-  box-shadow: 0 12px 40px rgba(30, 35, 90, 0.06);
-}
-
-.shot-clock-details {
-  order: 1;
-}
-
-.shot-clock-title {
-  font-size: 2.5rem;
-  font-weight: 900;
-  margin-bottom: 24px;
-  line-height: 1.2;
-  text-align: left;
-}
-
-.shot-clock-description {
-  color: var(--muted-color);
-  font-size: 1rem;
-  margin-bottom: 32px;
-  line-height: 1.7;
-}
-
-.shot-clock-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 28px;
-  border-radius: 12px;
-  background: var(--button-color);
-  color: var(--button-text);
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.shot-clock-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(111, 102, 227, 0.2);
-}
-
-.shot-clock-showcase {
-  order: 2;
-  padding: 40px;
-  background: var(--panel-color);
-  border-radius: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 400px;
-  box-shadow: 0 20px 50px rgba(30, 35, 90, 0.1);
-}
-
-.shot-clock-showcase img {
-  width: 100%;
-  max-width: 320px;
-  height: auto;
-  object-fit: contain;
-}
-
-@media (max-width: 1024px) {
-  .vendo-machine-section,
-  .shot-clock-section {
-    grid-template-columns: 1fr;
-    gap: 40px;
+      searchSuggestions.innerHTML = suggestionsHTML;
+      searchSuggestions.classList.add("show");
+    });
   }
 
-  .shot-clock-showcase {
-    order: 1;
+  // Close suggestions when clicking outside
+  document.addEventListener("click", function(event) {
+    const searchContainer = document.querySelector(".search-container");
+    const searchSuggestions = document.getElementById("searchSuggestions");
+    if (searchContainer && !event.target.closest(".search-container")) {
+      searchSuggestions?.classList.remove("show");
+    }
+  });
+}
+
+function initProductSearchPage() {
+  if (!isProductSearchPage()) return;
+
+  const searchInput = document.getElementById("searchInput");
+  const query = new URLSearchParams(window.location.search).get("search");
+
+  if (query) {
+    if (searchInput) searchInput.value = query;
+    renderSearchResults(query);
+    return;
   }
 
-  .shot-clock-details {
-    order: 2;
+  showSearchPrompt();
+}
+
+function renderSuggestions(rawQuery, suggestionsPanel) {
+  const query = rawQuery.trim().toLowerCase();
+
+  if (!query) {
+    suggestionsPanel.classList.remove("show");
+    suggestionsPanel.innerHTML = "";
+    return;
   }
 
-  .innovations-headline {
-    font-size: 2.8rem;
-  }
-}
-
-/* Search Container Wrapper */
-.search-container-wrapper {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-/* Search Container */
-.search-container {
-  display: flex;
-  width: 100%;
-  margin: 0;
-  max-width: 600px;
-}
-
-.search-input-wrapper {
-  flex: 1;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.search-container input {
-  width: 100%;
-  padding: 12px 16px 12px 16px;
-  padding-right: 50px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  font-family: 'Libre Baskerville', serif;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  background: white;
-}
-
-.search-container input::placeholder {
-  color: #999;
-}
-
-.search-container input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(111, 102, 227, 0.1);
-}
-
-.search-suggestions {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: white;
-  border: 1px solid #ddd;
-  border-top: none;
-  border-radius: 0 0 8px 8px;
-  max-height: 400px;
-  overflow-y: auto;
-  z-index: 100;
-  display: none;
-}
-
-.search-suggestions.show {
-  display: block;
-}
-
-.search-suggestion-item {
-  width: 100%;
-  padding: 12px 16px;
-  border: 0;
-  border-bottom: 1px solid #eee;
-  background: white;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  text-align: left;
-  font: inherit;
-}
-
-.search-suggestion-item:hover {
-  background-color: #f5f5f5;
-}
-
-.search-suggestion-item.category-suggestion {
-  background-color: #f9f7fc;
-  border-left: 3px solid #b39ddb;
-  cursor: pointer;
-}
-
-.search-suggestion-item.product-suggestion {
-  cursor: pointer;
-}
-
-.search-suggestion-item:last-child {
-  border-bottom: none;
-}
-
-.suggestion-category {
-  display: block;
-  font-weight: 600;
-  color: var(--primary-color);
-  font-size: 0.9rem;
-}
-
-.suggestion-name {
-  display: block;
-  color: var(--text-color);
-  font-size: 0.95rem;
-  margin-top: 4px;
-}
-
-.search-container button {
-  position: absolute;
-  right: 4px;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 8px 12px;
-  border: none;
-  background: transparent;
-  color: var(--primary-color);
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  transition: background 0.2s ease, color 0.2s ease;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 40px;
-  min-height: 40px;
-}
-
-.search-container button:hover {
-  background: rgba(111, 102, 227, 0.1);
-  color: #5a4fcf;
-}
-
-.search-container button:active {
-  background: rgba(111, 102, 227, 0.2);
-}
-
-/* Categories */
-.categories-section {
-  padding: 36px 40px 44px;
-  background: var(--bg-color);
-}
-
-.best-selling-container {
-  max-width: 1160px;
-  height: 285px;
-  margin: 0 auto;
-  display: grid;
-  padding: 20px;
-  grid-template-columns: minmax(230px, 330px) minmax(0, 1fr);
-  gap: 18px;
-  align-items: stretch;
-}
-
-.best-selling-hero {
-  position: relative;
-  overflow: hidden;
-  height: 245px;
-  background: var(--panel-color);
-  border: 1px solid rgba(74, 63, 159, 0.25);
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(30, 35, 90, 0.12);
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.best-selling-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(217, 213, 255, 0.8), rgba(217, 213, 255, 0.2));
-  z-index: 1;
-}
-
-.best-selling-hero:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(30, 35, 90, 0.1);
-}
-
-.best-selling-content {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  padding: 22px 28px;
-}
-
-.best-selling-headline {
-  font-size: 3rem;
-  font-weight: 900;
-  color: #151515;
-  line-height: 0.88;
-  text-align: left;
-  text-shadow: 3px 4px 0 rgba(255, 255, 255, 0.45);
-}
-
-.best-selling-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  filter: saturate(0.82) contrast(0.92);
-}
-
-/* Category Grid - 3x4 Layout */
-.category-grid-section {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px 18px;
-  align-content: flex-start;
-}
-
-.category-button {
-  display: grid;
-  grid-template-columns: 42px minmax(0, 1fr);
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 4px 10px 4px 4px;
-  background: var(--panel-color);
-  border: 1px solid rgba(74, 63, 159, 0.35);
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(30, 35, 90, 0.2);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: left;
-  color: var(--text-color);
-  font: inherit;
-}
-
-.category-button:hover {
-  border-color: var(--primary-color);
-  background: #cbc6f6;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(111, 102, 227, 0.18);
-}
-
-.category-image-frame {
-  width: 42px;
-  height: 42px;
-  display: block;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.85) center/cover no-repeat;
-  border-radius: 6px;
-}
-
-.category-button-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.category-button-text {
-  font-size: 0.86rem;
-  font-weight: 600;
-  color: var(--text-color);
-  line-height: 1.3;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Products Section */
-.products-section {
-  padding: 10px 40px;
-  background: var(--bg-color);
-}
-
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 24px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.products-grid:not(.search-results-grid) {
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-}
-
-.product-card {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(30, 35, 90, 0.08);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-}
-
-.products-grid:not(.search-results-grid) .product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 32px rgba(30, 35, 90, 0.15);
-}
-
-.product-card.search-result-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(30, 35, 90, 0.15);
-}
-
-.product-image-container {
-  width: 100%;
-  height: 180px;
-  overflow: hidden;
-  background: #f5f5f5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.product-image-wrapper {
-  width: 100%;
-  height: 180px;
-  overflow: hidden;
-  background: #f5f5f5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.product-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.product-card:hover .product-image {
-  transform: scale(1.05);
-}
-
-.product-info {
-  padding: 16px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.product-category {
-  font-size: 0.75rem;
-  color: var(--primary-color);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 6px;
-}
-
-.product-name {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--text-color);
-  margin-bottom: 8px;
-  line-height: 1.3;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.product-price {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-bottom: 12px;
-}
-
-.product-details {
-  font-size: 0.85rem;
-  color: var(--muted-color);
-  line-height: 1.5;
-  margin-bottom: 12px;
-}
-
-.add-to-cart-btn {
-  padding: 10px 16px;
-  background: var(--button-color);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.9rem;
-  margin-top: auto;
-}
-
-.add-to-cart-btn:hover {
-  background: #b39ddb;
-  transform: translateY(-2px);
-}
-
-.add-to-cart-btn:active {
-  transform: translateY(0);
-}
-
-.product-images-container {
-  display: flex;
-  overflow-x: auto;
-  width: 100%;
-}
-
-.product-images-container .product-image-wrapper {
-  flex-shrink: 0;
-}
-
-.no-results-message {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--muted-color);
-  font-size: 1.1rem;
-}
-
-.search-results-grid {
-  grid-template-columns: 1fr;
-  gap: 24px;
-  padding: 24px;
-}
-
-.search-product-card {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(30, 35, 90, 0.08);
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 0;
-  transition: all 0.3s ease;
-}
-
-.search-product-card:hover {
-  box-shadow: 0 12px 32px rgba(30, 35, 90, 0.15);
-}
-
-.search-card-images {
-  display: flex;
-  flex-direction: row;
-  gap: 0;
-  background: #f5f5f5;
-  overflow: hidden;
-}
-
-.search-card-image {
-  width: 50%;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: #f5f5f5;
-  flex-shrink: 0;
-  padding: 10px;
-}
-
-.search-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.search-product-card:hover .search-card-image img {
-  transform: scale(1.05);
-}
-
-.search-card-info {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  background: var(--panel-color);
-  border-radius: 0 12px 12px 0;
-}
-
-.search-card-name {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-color);
-  margin-bottom: 12px;
-  line-height: 1.3;
-}
-
-.search-card-price {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-bottom: 8px;
-}
-
-.search-card-rating {
-  font-size: 0.95rem;
-  color: var(--text-color);
-  margin-bottom: 12px;
-  font-weight: 500;
-}
-
-.search-card-details {
-  font-size: 0.9rem;
-  color: var(--muted-color);
-  line-height: 1.6;
-  margin-bottom: 16px;
-  flex: 1;
-}
-
-.search-card-buttons {
-  display: flex;
-  gap: 12px;
-  margin-top: auto;
-}
-
-.search-btn {
-  flex: 1;
-  padding: 12px 16px;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.95rem;
-}
-
-.add-to-cart-btn.search-btn {
-  background: var(--button-color);
-  color: var(--button-text);
-}
-
-.add-to-cart-btn.search-btn:hover {
-  background: #b39ddb;
-  transform: translateY(-2px);
-}
-
-.buy-now-btn {
-  background: var(--primary-color);
-  color: white;
-}
-
-.buy-now-btn:hover {
-  background: #5e5ac9;
-  transform: translateY(-2px);
-}
-
-.search-btn:active {
-  transform: translateY(0);
-}
-
-/* Reveal animation for scroll */
-.reveal-seam {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.reveal-seam.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Media Queries */
-@media (max-width: 1024px) {
-  .vendo-machine-section,
-  .shot-clock-section {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  const categories = [...new Set(allProducts.map((product) => product.category))];
+  const matchingCategories = categories.filter((category) => category.toLowerCase().includes(query));
+  const matchingProducts = allProducts.filter((product) => product.name.toLowerCase().includes(query));
+
+  const suggestions = [
+    ...matchingCategories.map((category) => ({ type: "category", value: category, label: category })),
+    ...matchingProducts.map((product) => ({ type: "product", value: product.name, label: product.name }))
+  ];
+
+  if (suggestions.length === 0) {
+    suggestionsPanel.classList.remove("show");
+    suggestionsPanel.innerHTML = "";
+    return;
   }
 
-  .shot-clock-showcase {
-    order: 1;
+  suggestionsPanel.innerHTML = suggestions.map((suggestion) => `
+    <div class="search-suggestion-item ${suggestion.type === "category" ? "category-suggestion" : ""}"
+      data-type="${suggestion.type}"
+      data-value="${escapeAttribute(suggestion.value)}">
+      <div class="suggestion-name">${escapeHTML(suggestion.label)}</div>
+    </div>
+  `).join("");
+  suggestionsPanel.classList.add("show");
+}
+
+function handleSearchSubmit(rawQuery) {
+  const query = rawQuery.trim();
+
+  if (isProductSearchPage()) {
+    renderSearchResults(query);
+    return;
   }
 
-  .shot-clock-details {
-    order: 2;
+  if (query) goToProductSearch(query);
+}
+
+function renderShoppingProducts(productsToShow) {
+  const grid = document.getElementById("productsGrid");
+  if (!grid) return;
+
+  grid.innerHTML = productsToShow.map((product) => `
+    <div class="product-card">
+      <div class="product-image-container">
+        <img src="${assetPath(product.image1)}" alt="${escapeAttribute(product.name)}" class="product-image">
+      </div>
+      <div class="product-info">
+        <div class="product-name">${escapeHTML(product.name)}</div>
+        <div class="product-price">${escapeHTML(product.price)}</div>
+        <button class="add-to-cart-btn">Add to Cart</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderSearchResults(rawQuery, suggestionType = "") {
+  const grid = document.getElementById("productsGrid");
+  const searchSuggestions = document.getElementById("searchSuggestions");
+  const query = rawQuery.trim();
+
+  if (!grid) return;
+  searchSuggestions?.classList.remove("show");
+
+  if (!query) {
+    showSearchPrompt();
+    return;
   }
 
-  .innovations-headline {
-    font-size: 2.8rem;
+  const lowerQuery = query.toLowerCase();
+  let filteredProducts;
+
+  if (lowerQuery === "best selling") {
+    filteredProducts = allProducts.filter((product) => product.bestSelling);
+  } else if (suggestionType === "category") {
+    filteredProducts = allProducts.filter((product) => product.category === query);
+  } else if (suggestionType === "product") {
+    filteredProducts = allProducts.filter((product) => product.name === query);
+  } else {
+    filteredProducts = allProducts.filter((product) =>
+      product.name.toLowerCase().includes(lowerQuery) ||
+      product.category.toLowerCase().includes(lowerQuery)
+    );
   }
 
-  .best-selling-container {
-    grid-template-columns: 1fr;
-    gap: 24px;
+  if (filteredProducts.length === 0) {
+    grid.innerHTML = '<div class="no-results-message">No products found matching your search. Try a different search term.</div>';
+    return;
   }
 
-  .best-selling-hero {
-    min-height: 220px;
-  }
+  grid.innerHTML = filteredProducts.map((product) => {
+    const rating = (4.5 + Math.random() * 0.5).toFixed(1);
+    return `
+    <div class="search-product-card">
+      <div class="search-card-images">
+        <div class="search-card-image">
+          <img src="${assetPath(product.image1)}" alt="${escapeAttribute(product.name)} - Image 1" class="product-image">
+        </div>
+        <div class="search-card-image">
+          <img src="${assetPath(product.image2)}" alt="${escapeAttribute(product.name)} - Image 2" class="product-image">
+        </div>
+      </div>
+      <div class="search-card-info">
+        <div class="search-card-name">${escapeHTML(product.name)}</div>
+        <div class="search-card-price">${escapeHTML(product.price)}</div>
+        <div class="search-card-rating">⭐ ${rating} Rating</div>
+        <div class="search-card-details">${escapeHTML(product.details)}</div>
+        <div class="search-card-buttons">
+          <button class="search-btn add-to-cart-btn">Add to Cart</button>
+          <button class="search-btn buy-now-btn">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  `}).join("");
+}
 
-  .best-selling-headline {
-    font-size: 2.8rem;
-  }
+function displayBestSellingImage() {
+  const image = document.getElementById("bestSellingImage");
+  const bestSellingProducts = allProducts.filter((product) => product.bestSelling);
 
-  .category-grid-section {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+  if (!image || bestSellingProducts.length === 0) return;
 
-  .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 16px;
-  }
+  const product = bestSellingProducts[Math.floor(Math.random() * bestSellingProducts.length)];
+  image.src = assetPath(product.image1);
+  image.alt = product.name;
+}
 
-  .search-results-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+function getCategoryImage(category) {
+  const product = allProducts.find(p => p.category === category);
+  return product ? assetPath(product.image1) : "";
+}
+
+function renderCategoryGrid() {
+  const categoryGridElement = document.getElementById("categoryGrid");
+  if (!categoryGridElement) return;
+
+  // Get unique categories from products, excluding Monitor
+  const categories = [...new Set(allProducts.map(p => p.category))].filter(cat => cat !== "Monitor");
+  
+  // Create category buttons HTML
+  const categoryButtonsHTML = categories.map(category => {
+    const imageUrl = getCategoryImage(category);
+    const backgroundStyle = imageUrl ? `background-image: url('${imageUrl}');` : "";
+    
+    return `
+      <button class="category-button">
+        <div class="category-image-frame" style="${backgroundStyle}"></div>
+        <span class="category-button-text">${escapeHTML(category)}</span>
+      </button>
+    `;
+  }).join('');
+  
+  categoryGridElement.innerHTML = categoryButtonsHTML;
+}
+
+function filterShoppingCategory(category) {
+  const grid = document.getElementById("productsGrid");
+  if (!grid) return;
+
+  // Filter products by category
+  const filtered = allProducts.filter(p => p.category === category);
+  renderShoppingProducts(filtered);
+
+  // Update active button state
+  document.querySelectorAll(".category-button").forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  document.querySelectorAll(".category-button").forEach(btn => {
+    const btnText = btn.textContent.trim();
+    if (btnText.includes(category) || category.includes(btnText)) {
+      btn.classList.add("active");
+    }
+  });
+
+  // Clear search input
+  const searchInput = document.querySelector(".search-container input");
+  if (searchInput) {
+    searchInput.value = "";
+  }
+  const searchSuggestions = document.getElementById("searchSuggestions");
+  if (searchSuggestions) {
+    searchSuggestions.classList.remove("show");
   }
 }
 
-@media (max-width: 768px) {
-  header.site-header {
-    flex-wrap: wrap;
-    gap: 16px;
-    padding: 16px 20px;
-  }
-
-  .navigation-links {
-    gap: 16px;
-  }
-
-  .innovations-banner {
-    padding: 40px 24px;
-    min-height: 60vh;
-  }
-
-  .innovations-headline {
-    font-size: 2.2rem;
-  }
-
-  .innovations-cta-group {
-    flex-direction: column;
-  }
-
-  .innovations-cta-button {
-    width: 100%;
-    text-align: center;
-  }
-
-  main.page-content {
-    padding: 40px 24px;
-  }
-
-  .vendo-machine-section,
-  .shot-clock-section {
-    gap: 30px;
-    padding: 30px;
-  }
-
-  .vendo-machine-title,
-  .shot-clock-title {
-    font-size: 1.8rem;
-  }
-
-  .best-selling-section {
-    padding: 40px 20px;
-  }
-
-  .best-selling-hero {
-    min-height: 190px;
-  }
-
-  .best-selling-headline {
-    font-size: 2.4rem;
-  }
-
-  .category-grid-section {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .category-button {
-    grid-template-columns: 40px minmax(0, 1fr);
-    padding: 4px 8px 4px 4px;
-  }
-
-  .category-button-text {
-    font-size: 0.8rem;
-  }
-
-  .products-section {
-    padding: 40px 20px;
-  }
-
-  .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px;
-  }
-
-  .search-results-grid {
-    grid-template-columns: 1fr;
-    padding: 16px;
-  }
-
-  .search-product-card {
-    grid-template-columns: 1fr;
-  }
-
-  .search-card-images {
-    border-radius: 12px 12px 0 0;
-    flex-direction: column;
-  }
-
-  .search-card-image {
-    width: 100%;
-    height: 120px;
-  }
-
-  .search-card-info {
-    border-radius: 0 0 12px 12px;
-  }
-
-  .product-image-wrapper {
-    height: 150px;
-  }
-
-  .product-info {
-    padding: 12px;
-  }
-
-  .product-name {
-    font-size: 0.85rem;
-  }
-
-  .product-price {
-    font-size: 1rem;
-  }
-
-  header.site-header > div:nth-child(2) {
-    width: 100%;
-    order: 3;
-  }
-
-  .search-container {
-    gap: 6px;
-  }
-
-  .search-container input {
-    padding: 10px 12px;
-    font-size: 0.9rem;
-  }
-
-  .search-container button {
-    padding: 10px 12px;
+function showBestSellingProducts() {
+  const bestSellingProducts = allProducts.filter(p => p.bestSelling === true);
+  
+  if (bestSellingProducts.length > 0) {
+    const grid = document.getElementById("productsGrid");
+    if (grid) {
+      renderShoppingProducts(bestSellingProducts);
+      
+      // Update active button state
+      document.querySelectorAll(".category-button").forEach(btn => {
+        btn.classList.remove("active");
+      });
+      
+      // Scroll to products section
+      document.querySelector(".products-section")?.scrollIntoView({ behavior: "smooth" });
+    }
   }
 }
 
-@media (max-width: 480px) {
-  header.site-header {
-    flex-direction: column;
-    padding: 12px 16px;
-    gap: 12px;
+function showSearchPrompt() {
+  const grid = document.getElementById("productsGrid");
+  if (grid) {
+    grid.innerHTML = '<div class="no-results-message">Enter a search term and click the search button to find products</div>';
   }
+}
 
-  .brand-logo img {
-    width: 80px;
-  }
+function goToProductSearch(query) {
+  window.location.href = `${productSearchPath()}?search=${encodeURIComponent(query)}`;
+}
 
-  .navigation-links {
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-  }
+function productSearchPath() {
+  return isInPagesFolder() ? "Product Search.html" : "Pages/Product Search.html";
+}
 
-  .header-actions {
-    gap: 12px;
-  }
+function assetPath(path) {
+  return isInPagesFolder() ? `../${path}` : path;
+}
 
-  .header-action-button {
-    width: 36px;
-    height: 36px;
-    font-size: 1rem;
-  }
+function isProductSearchPage() {
+  return decodeURIComponent(window.location.pathname).endsWith("/Product Search.html") ||
+    decodeURIComponent(window.location.pathname).endsWith("\\Product Search.html");
+}
 
-  .best-selling-headline {
-    font-size: 2rem;
-  }
+function isInPagesFolder() {
+  return /\/Pages\/|\\Pages\\/i.test(decodeURIComponent(window.location.pathname));
+}
 
-  .category-grid-section {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
+function escapeHTML(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
 
-  .category-button {
-    min-height: 46px;
-    padding: 5px 10px 5px 5px;
-  }
-
-  .category-button-text {
-    font-size: 0.82rem;
-  }
-
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  .search-results-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .product-image-wrapper {
-    height: 120px;
-  }
-
-  .product-info {
-    padding: 10px;
-  }
-
-  .product-category {
-    font-size: 0.7rem;
-  }
-
-  .product-name {
-    font-size: 0.8rem;
-  }
-
-  .product-price {
-    font-size: 0.95rem;
-  }
+function escapeAttribute(value) {
+  return escapeHTML(value);
 }
