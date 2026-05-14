@@ -496,8 +496,13 @@ function initQuantityControls() {
   });
 }
 
+function normalizePath(pathname) {
+  return decodeURIComponent(pathname).replace(/\\/g, "/").toLowerCase();
+}
+
 function isProductDetailPage() {
-  return /\/Pages\/Product\.html|\\Pages\\Product\.html/i.test(decodeURIComponent(window.location.pathname));
+  const pathname = normalizePath(window.location.pathname);
+  return pathname.endsWith("/product.html") || pathname.endsWith("/product");
 }
 
 function goToProductDetail(productName) {
@@ -525,13 +530,12 @@ function assetPath(path) {
 }
 
 function isProductSearchPage() {
-  const pathname = decodeURIComponent(window.location.pathname).toLowerCase();
-  return pathname.endsWith("/product search.html") ||
-    pathname.endsWith("\\product search.html");
+  const pathname = normalizePath(window.location.pathname);
+  return pathname.includes("/product search.html") || pathname.includes("/product search");
 }
 
 function isInPagesFolder() {
-  return /\/pages\/|\\pages\\/i.test(decodeURIComponent(window.location.pathname));
+  return /\/pages\//i.test(normalizePath(window.location.pathname));
 }
 
 function escapeHTML(value) {
