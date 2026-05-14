@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initSearchBox();
   initShoppingPage();
   initProductSearchPage();
+  initProductDetailPage();
 });
 
 function initScrollReveal() {
@@ -257,14 +258,14 @@ function renderShoppingProducts(productsToShow) {
   if (!grid) return;
 
   grid.innerHTML = productsToShow.map((product) => `
-    <div class="product-card">
+    <div class="product-card" onclick="goToProductDetail('${escapeAttribute(product.name)}')">
       <div class="product-image-container">
         <img src="${assetPath(product.image1)}" alt="${escapeAttribute(product.name)}" class="product-image">
       </div>
       <div class="product-info">
         <div class="product-name">${escapeHTML(product.name)}</div>
         <div class="product-price">${escapeHTML(product.price)}</div>
-        <button class="add-to-cart-btn">Add to Cart</button>
+        <button class="add-to-cart-btn" onclick="event.stopPropagation()">Add to Cart</button>
       </div>
     </div>
   `).join("");
@@ -307,7 +308,7 @@ function renderSearchResults(rawQuery, suggestionType = "") {
   grid.innerHTML = filteredProducts.map((product) => {
     const rating = (4.5 + Math.random() * 0.5).toFixed(1);
     return `
-    <div class="search-product-card">
+    <div class="search-product-card" onclick="goToProductDetail('${escapeAttribute(product.name)}')">
       <div class="search-card-images">
         <div class="search-card-image">
           <img src="${assetPath(product.image1)}" alt="${escapeAttribute(product.name)} - Image 1" class="product-image">
@@ -321,7 +322,7 @@ function renderSearchResults(rawQuery, suggestionType = "") {
         <div class="search-card-price">${escapeHTML(product.price)}</div>
         <div class="search-card-rating">⭐ ${rating} Rating</div>
         <div class="search-card-details">${escapeHTML(product.details)}</div>
-        <div class="search-card-buttons">
+        <div class="search-card-buttons" onclick="event.stopPropagation()">
           <button class="search-btn add-to-cart-btn">Add to Cart</button>
           <button class="search-btn buy-now-btn">Buy Now</button>
         </div>
@@ -417,6 +418,91 @@ function showBestSellingProducts() {
       document.querySelector(".products-section")?.scrollIntoView({ behavior: "smooth" });
     }
   }
+}
+
+function initProductDetailPage() {
+  if (!isProductDetailPage()) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const productName = params.get("product");
+
+  if (!productName) {
+    window.location.href = "Shopping.html";
+    return;
+  }
+
+  const product = allProducts.find(p => p.name === productName);
+
+  if (!product) {
+    window.location.href = "Shopping.html";
+    return;
+  }
+
+  document.getElementById("productImage1").src = assetPath(product.image1);
+  document.getElementById("productImage2").src = assetPath(product.image2);
+  document.getElementById("mainImage").src = assetPath(product.image1);
+  document.getElementById("productCategory").textContent = product.category;
+  document.getElementById("productName").textContent = product.name;
+  document.getElementById("productPrice").textContent = product.price;
+  document.getElementById("productRating").textContent = "⭐ 4.5 Rating";
+  document.getElementById("productDescription").textContent = product.details;
+  document.title = `${product.name} - ArdCom Electronics`;
+
+  initQuantityControls();
+}
+
+let currentImage = 1;
+
+function switchImage(imageNum) {
+  const mainImage = document.getElementById("mainImage");
+  const image1 = document.getElementById("productImage1");
+  const image2 = document.getElementById("productImage2");
+  const thumbs = document.querySelectorAll(".product-detail-thumb");
+
+  if (imageNum === 1) {
+    mainImage.src = image1.src;
+    currentImage = 1;
+  } else {
+    mainImage.src = image2.src;
+    currentImage = 2;
+  }
+
+  thumbs.forEach(thumb => thumb.classList.remove("selected"));
+  thumbs[imageNum - 1].classList.add("selected");
+}
+
+function initQuantityControls() {
+  const qtyInput = document.getElementById("quantityInput");
+  const qtyMinus = document.getElementById("qtyMinus");
+  const qtyPlus = document.getElementById("qtyPlus");
+
+  if (!qtyInput || !qtyMinus || !qtyPlus) return;
+
+  qtyMinus.addEventListener("click", () => {
+    const current = parseInt(qtyInput.value) || 1;
+    if (current > 1) qtyInput.value = current - 1;
+  });
+
+  qtyPlus.addEventListener("click", () => {
+    const current = parseInt(qtyInput.value) || 1;
+    if (current < 99) qtyInput.value = current + 1;
+  });
+
+  qtyInput.addEventListener("change", () => {
+    let val = parseInt(qtyInput.value) || 1;
+    if (val < 1) val = 1;
+    if (val > 99) val = 99;
+    qtyInput.value = val;
+  });
+}
+
+function isProductDetailPage() {
+  return /\/Pages\/Product\.html|\\Pages\\Product\.html/i.test(decodeURIComponent(window.location.pathname));
+}
+
+function goToProductDetail(productName) {
+  const page = isInPagesFolder() ? "Product.html" : "Pages/Product.html";
+  window.location.href = `${page}?product=${encodeURIComponent(productName)}`;
 }
 
 function showSearchPrompt() {
