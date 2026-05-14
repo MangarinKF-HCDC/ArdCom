@@ -943,7 +943,7 @@ main.page-content {
   }
 
   .search-results-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1135,7 +1135,7 @@ main.page-content {
   }
 
   .search-results-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 
   .product-image-wrapper {
