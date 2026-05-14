@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product - ArdCom Electronics</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <a href="../index.html" class="brand-logo">
+      <img src="../Source Image/Landing/ardcom-logo.png" alt="ArdCom Electronics Logo" />
+    </a>
+
+    <div style="flex: 1; display: flex; justify-content: center;">
+      <div class="search-container" style="margin: 0; max-width: 600px; width: 100%;">
+        <div class="search-input-wrapper">
+          <input type="text" id="searchInput" placeholder="Search" autocomplete="off" />
+          <button id="searchBtn" class="search-button" aria-label="Search">&#128269;</button>
+          <div class="search-suggestions" id="searchSuggestions"></div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navigation-links" aria-label="Primary navigation">
+      <a href="../index.html">Home</a>
+      <a href="Shopping.html">Shop</a>
+      <a href="#book">Book</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="header-action-button" aria-label="Shopping cart">&#128722;</button>
+      <button class="header-action-button" aria-label="User account">&#128100;</button>
+    </div>
+  </header>
+
+  <!-- Product Detail Section -->
+  <main class="product-detail-section">
+    <div class="product-detail-container">
+      <!-- Product Images -->
+      <div class="product-detail-images">
+        <div class="product-detail-image-main">
+          <img id="mainImage" src="" alt="Product Image" class="product-detail-img" />
+        </div>
+        <div class="product-detail-thumbnails">
+          <div class="product-detail-thumb selected" onclick="switchImage(1)">
+            <img id="productImage1" src="" alt="Product Image 1" class="product-detail-img-thumb" />
+          </div>
+          <div class="product-detail-thumb" onclick="switchImage(2)">
+            <img id="productImage2" src="" alt="Product Image 2" class="product-detail-img-thumb" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Info -->
+      <div class="product-detail-info">
+        <div class="product-detail-category" id="productCategory"></div>
+        <h1 class="product-detail-name" id="productName"></h1>
+        <div class="product-detail-price" id="productPrice"></div>
+        <div class="product-detail-rating" id="productRating"></div>
+        <div class="product-detail-description" id="productDescription"></div>
+
+        <!-- Quantity Selector -->
+        <div class="product-quantity-selector">
+          <label for="quantityInput">Quantity:</label>
+          <div class="quantity-controls">
+            <button class="qty-btn" id="qtyMinus">-</button>
+            <input type="number" id="quantityInput" value="1" min="1" max="99" />
+            <button class="qty-btn" id="qtyPlus">+</button>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="product-detail-buttons">
+          <button class="product-action-btn add-to-cart-btn">Add to Cart</button>
+          <button class="product-action-btn buy-now-btn">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../script.js" defer></script>
+  <style>
+    .product-detail-section {
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .product-detail-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(30, 35, 90, 0.1);
+    }
+
+    .product-detail-images {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .product-detail-image-main {
+      width: 100%;
+      height: 400px;
+      background: #f5f5f5;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .product-detail-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .product-detail-image-main:hover .product-detail-img {
+      transform: scale(1.05);
+    }
+
+    .product-detail-thumbnails {
+      display: flex;
+      gap: 12px;
+    }
+
+    .product-detail-thumb {
+      flex: 1;
+      height: 120px;
+      background: #f5f5f5;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 3px solid transparent;
+    }
+
+    .product-detail-thumb:hover {
+      border-color: var(--primary-color);
+    }
+
+    .product-detail-thumb.selected {
+      border-color: var(--primary-color);
+      box-shadow: 0 4px 12px rgba(111, 102, 227, 0.3);
+    }
+
+    .product-detail-img-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .product-detail-info {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .product-detail-category {
+      font-size: 0.85rem;
+      color: var(--primary-color);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .product-detail-name {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-color);
+      line-height: 1.2;
+    }
+
+    .product-detail-price {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .product-detail-rating {
+      font-size: 1rem;
+      color: var(--text-color);
+      font-weight: 500;
+    }
+
+    .product-detail-description {
+      font-size: 1rem;
+      color: var(--muted-color);
+      line-height: 1.7;
+      padding: 20px;
+      background: var(--panel-color);
+      border-radius: 12px;
+    }
+
+    .product-quantity-selector {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+    }
+
+    .product-quantity-selector label {
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--panel-color);
+      border-radius: 8px;
+      padding: 4px;
+    }
+
+    .qty-btn {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: white;
+      border-radius: 6px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .qty-btn:hover {
+      background: var(--button-color);
+    }
+
+    #quantityInput {
+      width: 60px;
+      height: 36px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    #quantityInput:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    .product-detail-buttons {
+      display: flex;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .product-action-btn {
+      flex: 1;
+      padding: 16px 24px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .product-action-btn.add-to-cart-btn {
+      background: var(--button-color);
+      color: var(--button-text);
+    }
+
+    .product-action-btn.add-to-cart-btn:hover {
+      background: #b39ddb;
+      transform: translateY(-2px);
+    }
+
+    .product-action-btn.buy-now-btn {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .product-action-btn.buy-now-btn:hover {
+      background: #5e5ac9;
+      transform: translateY(-2px);
+    }
+
+    .product-action-btn:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .product-detail-section {
+        padding: 20px;
+      }
+
+      .product-detail-container {
+        grid-template-columns: 1fr;
+        padding: 24px;
+        gap: 24px;
+      }
+
+      .product-detail-image-main {
+        height: 280px;
+      }
+
+      .product-detail-image-thumb {
+        height: 100px;
+      }
+
+      .product-detail-name {
+        font-size: 1.5rem;
+      }
+
+      .product-detail-price {
+        font-size: 1.4rem;
+      }
+
+      .product-detail-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</body>
+</html>
