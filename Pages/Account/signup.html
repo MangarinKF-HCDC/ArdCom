@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArdCom Sign Up</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <link rel="stylesheet" href="design.css" />
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+
+<body>
+
+  <div class="circle circle-1"></div>
+  <div class="circle circle-2"></div>
+  <div class="circle circle-3"></div>
+  <div class="circle circle-4"></div>
+
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <a href="../../index.html" class="brand-logo">
+      <img src="../../Source Image/Landing/ardcom-logo.png" alt="ArdCom Electronics Logo" />
+    </a>
+
+    <nav class="navigation-links" aria-label="Primary navigation">
+      <a href="../../index.html">Home</a>
+      <a href="login.html">Log In</a>
+      <a href="signup.html">Sign Up</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="header-action-button" aria-label="User account" onclick="window.location.href='login.html'">👤</button>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <section class="glass-card right-panel signup-panel">
+
+      <div class="panel-content auth-content">
+
+        <h2>Create Account</h2>
+
+        <div class="social-buttons">
+          <button type="button"><i class="fa-brands fa-google"></i></button>
+          <button type="button"><i class="fa-brands fa-facebook-f"></i></button>
+          <button type="button"><i class="fa-brands fa-instagram"></i></button>
+          <button type="button"><i class="fa-brands fa-apple"></i></button>
+        </div>
+
+        <span class="small-text">
+          Register with E-mail instead
+        </span>
+
+        <form id="signupForm">
+
+          <div class="input-group">
+            <i class="fa-regular fa-user"></i>
+            <input type="text" name="username" placeholder="Enter Name" required>
+          </div>
+
+          <div class="input-group">
+            <i class="fa-regular fa-envelope"></i>
+            <input type="email" name="email" placeholder="Enter E-mail" required>
+          </div>
+
+          <div class="input-group">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="signupPassword" name="password" placeholder="Enter Password" required>
+
+            <span class="toggle-password-signup">
+              <i class="fa-regular fa-eye"></i>
+            </span>
+          </div>
+
+
+          <button type="submit" class="primary-btn signup-btn">
+            Sign Up
+          </button>
+
+
+          <a href="login.html" class="secondary-link">
+            Already have an account? Log In
+          </a>
+
+        </form>
+
+      </div>
+    </section>
+
+
+    <section class="glass-card left-panel welcome-panel">
+
+      <div class="panel-content">
+
+        <h1>Welcome to ArdCom!</h1>
+
+        <p>Log in with E-mail and Password instead</p>
+
+        <a href="login.html">
+          <button class="primary-btn" type="button">
+            Log In
+          </button>
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="forms.js"></script>
+</body>
+</html>
