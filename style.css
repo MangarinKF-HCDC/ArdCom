@@ -739,7 +739,7 @@ main.page-content {
 }
 
 .search-results-grid {
-  grid-template-columns: repeat(auto-fit, minmax(620px, 1fr));
+  grid-template-columns: 1fr;
   gap: 24px;
   padding: 24px;
 }
