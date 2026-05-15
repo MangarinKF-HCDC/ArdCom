@@ -188,8 +188,21 @@ function buyNowProduct(productName) {
     cartManager.clearCart();
     cartManager.addToCart(product);
     
+    // Determine correct path based on current location
+    const pathname = window.location.pathname.toLowerCase();
+    let buyingPagePath = 'Buy and Confirmation/buying.html';
+    
+    // If we're in /pages/ (deployed), use relative path
+    if (pathname.includes('/pages/')) {
+      buyingPagePath = 'Buy and Confirmation/buying.html';
+    }
+    // If we're in local Pages folder, use relative path
+    else if (pathname.includes('pages/')) {
+      buyingPagePath = 'Buy and Confirmation/buying.html';
+    }
+    
     // Redirect to buying page
-    window.location.href = 'Buy and Confirmation/buying.html';
+    window.location.href = buyingPagePath;
   }
 }
 
