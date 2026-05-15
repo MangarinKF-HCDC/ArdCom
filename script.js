@@ -253,6 +253,7 @@ function handleSearchSubmit(rawQuery) {
   if (query) goToProductSearch(query);
 }
 
+// Render shopping page products with both Add to Cart and Buy Now buttons
 function renderShoppingProducts(productsToShow) {
   const grid = document.getElementById("productsGrid");
   if (!grid) return;
