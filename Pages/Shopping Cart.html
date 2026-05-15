@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart - ArdCom Electronics</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="cart-and-buy.css" />
+</head>
+<body>
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <a href="../index.html" class="brand-logo">
+      <img src="../Source Image/Landing/ardcom-logo.png" alt="ArdCom Electronics Logo" />
+    </a>
+
+    <nav class="navigation-links" aria-label="Primary navigation">
+      <a href="../index.html">Home</a>
+      <a href="Shopping.html">Shop</a>
+      <a href="Booking/Booking.html">Book</a>
+      <a href="About/about.html">About</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="header-action-button active-cart" aria-label="Shopping cart" onclick="window.location.href='Shopping Cart.html'">🛒</button>
+      <button class="header-action-button" aria-label="User account" onclick="window.location.href='Account/login.html'">👤</button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="cart-page">
+    <div class="cart-container">
+      <!-- Cart Items Section -->
+      <section class="cart-items-section">
+        <h1 class="cart-title">Your Cart</h1>
+        
+        <!-- Cart Items List -->
+        <div id="cart-items-list" class="cart-items-list">
+          <!-- Cart items will be dynamically inserted here -->
+        </div>
+
+        <!-- Empty Cart Message -->
+        <div id="empty-cart-message" class="empty-cart-message" style="display: none;">
+          <p>Your cart is empty</p>
+          <a href="Shopping.html" class="continue-shopping-btn">Continue Shopping</a>
+        </div>
+      </section>
+
+      <!-- Cart Summary Section -->
+      <section class="cart-summary-section">
+        <!-- Platform Vouchers -->
+        <div class="vouchers-container">
+          <label for="platform-vouchers">Platform Vouchers:</label>
+          <input 
+            type="text" 
+            id="platform-vouchers" 
+            class="vouchers-input" 
+            placeholder="Enter voucher code"
+            aria-label="Platform vouchers code"
+          />
+          <button id="apply-voucher-btn" class="apply-voucher-btn">Apply</button>
+        </div>
+
+        <!-- Summary Information -->
+        <div class="summary-info">
+          <div class="summary-row">
+            <span class="summary-label">Items Selected:</span>
+            <span id="items-count" class="summary-value">0</span>
+          </div>
+          <div class="summary-row total-row">
+            <span class="summary-label">Total:</span>
+            <span id="total-price" class="summary-value">₱ 00.00</span>
+          </div>
+        </div>
+
+        <!-- Cart Actions -->
+        <div class="cart-actions">
+          <div class="checkbox-group">
+            <input type="checkbox" id="select-all-checkbox" aria-label="Select all items" />
+            <label for="select-all-checkbox" class="select-all-label">Select all</label>
+            <button id="delete-selected-btn" class="delete-btn" aria-label="Delete selected items">Delete</button>
+          </div>
+
+          <button id="checkout-btn" class="checkout-btn" aria-label="Proceed to checkout">Check Out!</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+
+  <!-- Scripts -->
+  <script src="../script.js" defer></script>
+  <script src="api-client.js" defer></script>
+  <script src="shared.js" defer></script>
+  <script src="cart-and-buy.js"></script>
+</body>
+</html>

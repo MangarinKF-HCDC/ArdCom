@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About ArdCom Electronics</title>
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../Landing.html" class="brand-logo">
+      <img src="../../Source Image/Landing/ardcom-logo.png" alt="ArdCom Electronics Logo" />
+    </a>
+
+    <nav class="navigation-links" aria-label="Primary navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../Shopping.html">Shop</a>
+      <a href="../Booking/Booking.html">Book</a>
+      <a href="about.html" class="active">About</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="header-action-button" aria-label="Shopping cart" onclick="window.location.href='../Shopping Cart.html'">🛒</button>
+      <button class="header-action-button" aria-label="User account" onclick="window.location.href='../Account/login.html'">👤</button>
+    </div>
+  </header>
+
+  <section class="about-hero">
+    <div class="about-hero-content">
+      <h1>Who is ArdCom?</h1>
+      <p>Founded by Christian Jude T. Elicor, the company was running for 11 years and counting in distributing quality and affordable PC parts and WiFi vending machines here in Mindanao. ArdCom Electronics was founded in 2012.</p>
+    </div>
+  </section>
+
+  <main class="page-content about-page">
+    <section class="about-panels">
+      <div class="about-panel">
+        <h2>CORE VALUES</h2>
+        <p>Empowering Progress, Resourcing the Future: Progressive Excellence, Efficiency & Reliability, and Empowerment.</p>
+      </div>
+    </section>
+
+    <section class="about-goals">
+      <article class="about-card">
+        <h3>MISSION</h3>
+        <ul>
+          <li>We provide efficient business opportunities and essential resources to meet the demands of a modern, tech-driven society.</li>
+          <li>As the world evolves, we bridge the gap by delivering the tools and services necessary for constant adaptation.</li>
+          <li>Our company exists to empower the masses through accessible technology and professional growth.</li>
+        </ul>
+      </article>
+      <article class="about-card">
+        <h3>VISION</h3>
+        <ul>
+          <li>ArdCom Electronics envisions a future where greater opportunities are accessible to everyone.</li>
+          <li>We strive to become a leading industry force by scaling our operations into a global corporation.</li>
+          <li>Through our growth, we aim to create a significant and lasting impact on the world.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="about-locations" id="book">
+      <h2>STORE LOCATIONS</h2>
+      <div class="about-locations-grid">
+        <div class="about-map-panel">
+          <iframe id="branch-map" src="https://www.google.com/maps/d/u/0/embed?mid=1Qg4svOV257bLYYso8S6UH74X6dWJXvA&ehbc=2E312F&noprof=1" width="100%" height="480" title="ArdCom branch locations map"></iframe>
+        </div>
+        <div class="branch-list-panel">
+   
+          <ul class="branch-list">
+            <li><button type="button" data-map-src="https://maps.google.com/maps?q=7.06795,125.61241&z=16&output=embed">Main Branch UIC</button></li>
+            <li><button type="button" data-map-src="https://maps.google.com/maps?q=7.06999,125.61714&z=16&output=embed">Guerrero Branch</button></li>
+            <li><button type="button" data-map-src="https://maps.google.com/maps?q=7.59956,125.96568&z=16&output=embed">Nabunturan Branch</button></li>
+            <li><button type="button" data-map-src="https://maps.google.com/maps?q=6.95967,126.21018&z=16&output=embed">Mati Branch</button></li>
+            <li><button type="button" data-map-src="https://maps.google.com/maps?q=7.92883,125.09615&z=16&output=embed">Bukidnon Branch</button></li>
+            <li><button type="button" data-map-src="https://maps.google.com/maps?q=7.45582,125.80413&z=16&output=embed">Tagum Branch</button></li>
+            <li><button type="button" data-map-src="https://maps.google.com/maps?q=6.11539,125.17015&z=16&output=embed">GenSan Branch</button></li>
+          </ul>
+          <button id="reset-map" class="map-reset-button" type="button">View all branches</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../api-client.js" defer></script>
+  <script src="../shared.js" defer></script>
+  <script>
+    const mapFrame = document.getElementById('branch-map');
+    const branchButtons = document.querySelectorAll('[data-map-src]');
+    branchButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        mapFrame.src = button.dataset.mapSrc;
+        branchButtons.forEach(btn => btn.classList.remove('active-branch'));
+        button.classList.add('active-branch');
+      });
+    });
+    document.getElementById('reset-map').addEventListener('click', () => {
+      mapFrame.src = 'https://www.google.com/maps/d/u/0/embed?mid=1Qg4svOV257bLYYso8S6UH74X6dWJXvA&ehbc=2E312F&noprof=1';
+      branchButtons.forEach(btn => btn.classList.remove('active-branch'));
+    });
+  </script>
+</body>
+</html>

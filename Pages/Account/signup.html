@@ -80,6 +80,30 @@
             </span>
           </div>
 
+          <div class="input-group">
+            <i class="fa-solid fa-phone"></i>
+            <input type="tel" name="phone" placeholder="Enter Mobile Number" required>
+          </div>
+
+          <div class="input-group">
+            <i class="fa-solid fa-location-dot"></i>
+            <input type="text" name="address" placeholder="Delivery Address" required>
+          </div>
+
+          <div class="input-group">
+            <i class="fa-solid fa-city"></i>
+            <input type="text" name="city" placeholder="City" required>
+          </div>
+
+          <div class="input-group">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <input type="text" name="province" placeholder="Province" required>
+          </div>
+
+          <div class="input-group">
+            <i class="fa-solid fa-mailbox"></i>
+            <input type="text" name="postal_code" placeholder="Postal Code" required>
+          </div>
 
           <button type="submit" class="primary-btn signup-btn">
             Sign Up
@@ -116,6 +140,22 @@
 
   </main>
 
-  <script src="forms.js"></script>
+  <script src="forms.js" defer></script>
+  
+  <script defer>
+    // Password toggle for signup
+    document.addEventListener('DOMContentLoaded', function() {
+      const signupToggle = document.querySelector(".toggle-password-signup");
+      const signupPassword = document.getElementById("signupPassword");
+      
+      if (signupToggle && signupPassword) {
+        signupToggle.addEventListener("click", function() {
+          const type = signupPassword.getAttribute("type") === "password" ? "text" : "password";
+          signupPassword.setAttribute("type", type);
+          signupToggle.innerHTML = type === "password" ? '<i class="fa-regular fa-eye"></i>' : '<i class="fa-regular fa-eye-slash"></i>';
+        });
+      }
+    });
+  </script>
 </body>
 </html>

@@ -13,14 +13,14 @@
     </a>
 
     <nav class="navigation-links" aria-label="Primary navigation">
-      <a href="../index.html" class="active">Home</a>
+      <a href="index.html" class="active">Home</a>
       <a href="Pages/Shopping.html">Shop</a>
-      <a href="#book">Book</a>
-      <a href="#about">About</a>
+      <a href="Pages/Booking/Booking.html">Book</a>
+      <a href="Pages/About/about.html">About</a>
     </nav>
 
     <div class="header-actions">
-      <button class="header-action-button" aria-label="Shopping cart">🛒</button>
+      <button class="header-action-button" aria-label="Shopping cart" onclick="window.location.href='Pages/Shopping Cart.html'">🛒</button>
       <button class="header-action-button" aria-label="User account" onclick="window.location.href='Pages/Account/login.html'">👤</button>
     </div>
   </header>
@@ -31,7 +31,7 @@
       <h1 class="innovations-headline">Innovations are goals and solution becoming realities</h1>
       <div class="innovations-cta-group">
         <a href="Pages/Shopping.html" class="innovations-cta-button shop-now">Shop Now!</a>
-        <a href="#book" class="innovations-cta-button book-session">Book a session</a>
+        <a href="Pages/Booking/Booking.html" class="innovations-cta-button book-session">Book a session</a>
       </div>
     </div>
   </section>
@@ -64,5 +64,7 @@
   </main>
 
   <script src="script.js" defer></script>
+  <script src="Pages/api-client.js" defer></script>
+  <script src="Pages/shared.js" defer></script>
 </body>
 </html>

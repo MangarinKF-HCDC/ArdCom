@@ -265,7 +265,7 @@ function renderShoppingProducts(productsToShow) {
       <div class="product-info">
         <div class="product-name">${escapeHTML(product.name)}</div>
         <div class="product-price">${escapeHTML(product.price)}</div>
-        <button class="add-to-cart-btn" onclick="event.stopPropagation()">Add to Cart</button>
+        <button class="add-to-cart-btn" data-product-name="${escapeAttribute(product.name)}" onclick="event.stopPropagation()">Add to Cart</button>
       </div>
     </div>
   `).join("");
@@ -323,7 +323,7 @@ function renderSearchResults(rawQuery, suggestionType = "") {
         <div class="search-card-rating">⭐ ${rating} Rating</div>
         <div class="search-card-details">${escapeHTML(product.details)}</div>
         <div class="search-card-buttons" onclick="event.stopPropagation()">
-          <button class="search-btn add-to-cart-btn">Add to Cart</button>
+          <button class="search-btn add-to-cart-btn" data-product-name="${escapeAttribute(product.name)}">Add to Cart</button>
           <button class="search-btn buy-now-btn">Buy Now</button>
         </div>
       </div>

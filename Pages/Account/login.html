@@ -110,7 +110,25 @@
 
   </main>
 
-  <script src="forms.js"></script>
+  <script src="../api-client.js" defer></script>
+  <script src="../shared.js" defer></script>
+  <script src="forms.js" defer></script>
+  
+  <script defer>
+    // Password toggle for login
+    document.addEventListener('DOMContentLoaded', function() {
+      const togglePassword = document.querySelector(".toggle-password");
+      const password = document.getElementById("password");
+      
+      if (togglePassword && password) {
+        togglePassword.addEventListener("click", function() {
+          const type = password.getAttribute("type") === "password" ? "text" : "password";
+          password.setAttribute("type", type);
+          togglePassword.innerHTML = type === "password" ? '<i class="fa-regular fa-eye"></i>' : '<i class="fa-regular fa-eye-slash"></i>';
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>

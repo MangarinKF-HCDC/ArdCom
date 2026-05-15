@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking Confirmation - ArdCom Electronics</title>
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="booking.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../index.html" class="brand-logo">
+      <img src="../../Source Image/Landing/ardcom-logo.png" alt="ArdCom Electronics Logo" />
+    </a>
+    <nav class="navigation-links" aria-label="Primary navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../Shopping.html">Shop</a>
+      <a href="Booking.html">Book</a>
+      <a href="../About/about.html">About</a>
+    </nav>
+    <div class="header-actions">
+      <button class="header-action-button" aria-label="Shopping cart" onclick="window.location.href='../Shopping Cart.html'">🛒</button>
+      <button class="header-action-button" aria-label="User account" onclick="window.location.href='../Account/login.html'">👤</button>
+    </div>
+  </header>
+
+  <main class="confirmation-page">
+    <section class="confirmation-card">
+      <h1>You Successfully Created a Session</h1>
+      <p class="confirmation-subtitle">Your reference number is</p>
+      <p class="confirmation-code" id="confirmationCode">ACDVOI-0005032026001</p>
+      <p class="confirmation-copy">Present this to an ArdCom Representative physically.</p>
+      <button class="booking-submit" id="backButton">Back to Main Menu</button>
+    </section>
+  </main>
+
+  <script src="../api-client.js" defer></script>
+  <script src="../shared.js" defer></script>
+  <script>
+    const referenceElement = document.getElementById('confirmationCode');
+    const backButton = document.getElementById('backButton');
+    const storedData = localStorage.getItem('bookingConfirmation');
+
+    if (storedData) {
+      try {
+        const bookingConfirmation = JSON.parse(storedData);
+        if (bookingConfirmation.reference) {
+          referenceElement.textContent = bookingConfirmation.reference;
+        }
+      } catch (error) {
+        console.error('Unable to read booking confirmation data', error);
+      }
+    }
+
+    backButton.addEventListener('click', () => {
+      window.location.href = 'Booking.html';
+    });
+  </script>
+</body>
+</html>

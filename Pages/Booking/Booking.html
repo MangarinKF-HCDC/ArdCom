@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Session - ArdCom Electronics</title>
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="booking.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../index.html" class="brand-logo">
+      <img src="../../Source Image/Landing/ardcom-logo.png" alt="ArdCom Electronics Logo" />
+    </a>
+    <nav class="navigation-links" aria-label="Primary navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../Shopping.html">Shop</a>
+      <a href="Booking.html" class="active">Book</a>
+      <a href="../About/about.html">About</a>
+    </nav>
+    <div class="header-actions">
+      <button class="header-action-button" aria-label="Shopping cart" onclick="window.location.href='../Shopping Cart.html'">🛒</button>
+      <button class="header-action-button" aria-label="User account" onclick="window.location.href='../Account/login.html'">👤</button>
+    </div>
+  </header>
+
+  <main class="booking-page">
+    <section class="booking-panel">
+      <div class="booking-visual">
+        <div class="visual-shape"></div>
+        <div class="photo-stack">
+          <img src="../../Source Image/Booking/f2f talk.jpg" alt="Face-to-face talk session" />
+          <img src="../../Source Image/Booking/buildpc.jpeg" alt="Building PC session" />
+          <img src="../../Source Image/Booking/repair 1.jpg" alt="Repair consultation" />
+          <img src="../../Source Image/Booking/pc cleaning.jpg" alt="PC cleaning session" />
+          <img src="../../Source Image/Booking/install 1.jpg" alt="Installation consultation" />
+        </div>
+      </div>
+
+      <div class="booking-form-card">
+        <div class="booking-header">
+          <h1>Book Session:</h1>
+          <p>Fill out the booking form.</p>
+        </div>
+
+        <form id="bookingForm" novalidate>
+          <div class="section-label">Personal Information</div>
+
+          <div class="field-row split">
+            <label class="field-group" for="firstName">
+              <span>First Name:</span>
+              <input type="text" id="firstName" name="firstName" required placeholder="Enter your first name" />
+            </label>
+            <label class="field-group" for="lastName">
+              <span>Last Name:</span>
+              <input type="text" id="lastName" name="lastName" required placeholder="Enter your last name" />
+            </label>
+          </div>
+
+          <div class="field-row split">
+            <label class="field-group" for="phone">
+              <span>Mobile Number:</span>
+              <input type="tel" id="phone" name="phone" required placeholder="09XXXXXXXXX" pattern="[0-9\s+()-]{7,20}" />
+            </label>
+            <label class="field-group" for="email">
+              <span>Email Address:</span>
+              <input type="email" id="email" name="email" required placeholder="example@mail.com" />
+            </label>
+          </div>
+
+          <div class="section-label">Session Consultation</div>
+
+          <div class="field-row single">
+            <label for="sessionDateInput">Select your Session Date:</label>
+            <div class="date-field-wrap">
+              <input type="text" id="sessionDateInput" name="sessionDateInput" readonly required placeholder="Select a date" aria-haspopup="dialog" />
+              <div class="calendar-popup" id="calendarPopup" aria-label="Calendar" role="dialog"></div>
+              <input type="hidden" id="sessionDate" name="sessionDate" required />
+            </div>
+          </div>
+
+          <div class="field-row single">
+            <label for="details">Explain your concern/consultation:</label>
+            <textarea id="details" name="details" rows="7" required placeholder="Tell us about your issue or request."></textarea>
+          </div>
+
+          <button type="submit" class="booking-submit">Submit</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="../api-client.js" defer></script>
+  <script src="../shared.js" defer></script>
+  <script src="booking.js"></script>
+</body>
+</html>

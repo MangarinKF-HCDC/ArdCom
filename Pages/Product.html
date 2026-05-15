@@ -25,12 +25,12 @@
     <nav class="navigation-links" aria-label="Primary navigation">
       <a href="../index.html">Home</a>
       <a href="Shopping.html">Shop</a>
-      <a href="#book">Book</a>
-      <a href="#about">About</a>
+      <a href="Booking/Booking.html">Book</a>
+      <a href="About/about.html">About</a>
     </nav>
 
     <div class="header-actions">
-      <button class="header-action-button" aria-label="Shopping cart">&#128722;</button>
+      <button class="header-action-button" aria-label="Shopping cart" onclick="window.location.href='Shopping Cart.html'">&#128722;</button>
       <button class="header-action-button" aria-label="User account" onclick="window.location.href='Account/login.html'">&#128100;</button>
     </div>
   </header>
@@ -73,14 +73,16 @@
 
         <!-- Action Buttons -->
         <div class="product-detail-buttons">
-          <button class="product-action-btn add-to-cart-btn">Add to Cart</button>
-          <button class="product-action-btn buy-now-btn">Buy Now</button>
+          <button class="product-action-btn add-to-cart-btn" data-product-name="" type="button">Add to Cart</button>
+          <button class="product-action-btn buy-now-btn" type="button">Buy Now</button>
         </div>
       </div>
     </div>
   </main>
 
   <script src="../script.js" defer></script>
+  <script src="api-client.js" defer></script>
+  <script src="shared.js" defer></script>
   <style>
     .product-detail-section {
       padding: 40px;
