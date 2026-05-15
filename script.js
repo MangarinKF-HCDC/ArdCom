@@ -258,14 +258,17 @@ function renderShoppingProducts(productsToShow) {
   if (!grid) return;
 
   grid.innerHTML = productsToShow.map((product) => `
-    <div class="product-card" onclick="goToProductDetail('${escapeAttribute(product.name)}')">
-      <div class="product-image-container">
+    <div class="product-card">
+      <div class="product-image-container" onclick="goToProductDetail('${escapeAttribute(product.name)}')">
         <img src="${assetPath(product.image1)}" alt="${escapeAttribute(product.name)}" class="product-image">
       </div>
       <div class="product-info">
-        <div class="product-name">${escapeHTML(product.name)}</div>
+        <div class="product-name" onclick="goToProductDetail('${escapeAttribute(product.name)}')" style="cursor: pointer;">${escapeHTML(product.name)}</div>
         <div class="product-price">${escapeHTML(product.price)}</div>
-        <button class="add-to-cart-btn" data-product-name="${escapeAttribute(product.name)}" onclick="event.stopPropagation()">Add to Cart</button>
+        <div class="product-buttons" style="display: flex; gap: 10px;">
+          <button class="add-to-cart-btn" onclick="addToCartFromProduct('${escapeAttribute(product.name)}'); event.stopPropagation();">Add to Cart</button>
+          <button class="buy-now-btn" onclick="buyNowProduct('${escapeAttribute(product.name)}'); event.stopPropagation();" style="flex: 1; padding: 8px; background-color: #d946a6; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">Buy Now</button>
+        </div>
       </div>
     </div>
   `).join("");
@@ -308,8 +311,8 @@ function renderSearchResults(rawQuery, suggestionType = "") {
   grid.innerHTML = filteredProducts.map((product) => {
     const rating = (4.5 + Math.random() * 0.5).toFixed(1);
     return `
-    <div class="search-product-card" onclick="goToProductDetail('${escapeAttribute(product.name)}')">
-      <div class="search-card-images">
+    <div class="search-product-card">
+      <div class="search-card-images" onclick="goToProductDetail('${escapeAttribute(product.name)}')">
         <div class="search-card-image">
           <img src="${assetPath(product.image1)}" alt="${escapeAttribute(product.name)} - Image 1" class="product-image">
         </div>
@@ -318,13 +321,13 @@ function renderSearchResults(rawQuery, suggestionType = "") {
         </div>
       </div>
       <div class="search-card-info">
-        <div class="search-card-name">${escapeHTML(product.name)}</div>
+        <div class="search-card-name" onclick="goToProductDetail('${escapeAttribute(product.name)}')" style="cursor: pointer;">${escapeHTML(product.name)}</div>
         <div class="search-card-price">${escapeHTML(product.price)}</div>
         <div class="search-card-rating">⭐ ${rating} Rating</div>
         <div class="search-card-details">${escapeHTML(product.details)}</div>
-        <div class="search-card-buttons" onclick="event.stopPropagation()">
-          <button class="search-btn add-to-cart-btn" data-product-name="${escapeAttribute(product.name)}">Add to Cart</button>
-          <button class="search-btn buy-now-btn">Buy Now</button>
+        <div class="search-card-buttons" style="display: flex; gap: 10px; margin-top: 10px;">
+          <button class="search-btn add-to-cart-btn" onclick="addToCartFromProduct('${escapeAttribute(product.name)}'); event.stopPropagation();">Add to Cart</button>
+          <button class="search-btn buy-now-btn" onclick="buyNowProduct('${escapeAttribute(product.name)}'); event.stopPropagation();" style="background-color: #d946a6; color: white;">Buy Now</button>
         </div>
       </div>
     </div>

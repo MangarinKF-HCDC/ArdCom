@@ -73,15 +73,17 @@
 
         <!-- Action Buttons -->
         <div class="product-detail-buttons">
-          <button class="product-action-btn add-to-cart-btn" data-product-name="" type="button">Add to Cart</button>
-          <button class="product-action-btn buy-now-btn" type="button">Buy Now</button>
+          <button class="product-action-btn add-to-cart-btn" onclick="addToCartFromProduct(document.getElementById('productName').textContent); event.stopPropagation();" type="button">Add to Cart</button>
+          <button class="product-action-btn buy-now-btn" onclick="buyNowProduct(document.getElementById('productName').textContent); event.stopPropagation();" type="button">Buy Now</button>
         </div>
       </div>
     </div>
   </main>
 
   <script src="../script.js" defer></script>
+  <script src="config.js" defer></script>
   <script src="api-client.js" defer></script>
+  <script src="cart-manager.js" defer></script>
   <script src="shared.js" defer></script>
   <style>
     .product-detail-section {

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Buy and Confirmation CSS */
 
 * {
@@ -491,3 +492,498 @@ body {
         margin-bottom: 15px;
     }
 }
+=======
+/* Buy and Confirmation CSS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #e8d5f2;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.logo {
+    flex-shrink: 0;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+}
+
+.search-bar {
+    display: flex;
+    gap: 5px;
+    flex: 1;
+    max-width: 300px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.search-btn {
+    background-color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.nav-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-icons a {
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Buying Page Styles */
+.buying-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.buying-content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.section-title {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.order-section {
+    background-color: #e8d5f2;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Delivery Address Section */
+.delivery-address-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.section-header h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.delivery-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    gap: 30px;
+}
+
+.address-details {
+    flex: 1;
+}
+
+.customer-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.customer-phone {
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 14px;
+}
+
+.customer-address {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.change-btn {
+    background-color: white;
+    border: 2px solid #d946a6;
+    color: #d946a6;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.change-btn:hover {
+    background-color: #d946a6;
+    color: white;
+}
+
+/* Items Ordered Section */
+.items-ordered-box {
+    padding: 20px;
+}
+
+.items-table-container {
+    overflow-x: auto;
+}
+
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.items-table thead {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.items-table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.items-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    color: #666;
+}
+
+.product-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.product-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-name {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.product-variation {
+    font-size: 12px;
+    color: #999;
+}
+
+.price {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Shipping Options Section */
+.shipping-options-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.shipping-label {
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+}
+
+.shipping-select {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Order Total Section */
+.order-total-box {
+    padding: 20px;
+    text-align: right;
+}
+
+.item-count {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.total-amount {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+}
+
+/* Payment Methods Section */
+.payment-methods-box h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.payment-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.payment-btn {
+    flex: 1;
+    min-width: 100px;
+    padding: 12px 20px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    background-color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.payment-btn:hover {
+    background-color: #d946a6;
+    color: white;
+    border-color: #d946a6;
+}
+
+.payment-btn.active {
+    background-color: #d946a6;
+    color: white;
+    border-color: #d946a6;
+}
+
+/* Payment Summary Section */
+.payment-summary-box {
+    padding: 20px;
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    color: #333;
+    font-weight: 500;
+}
+
+.summary-value {
+    text-align: right;
+    font-weight: 600;
+}
+
+.total-row {
+    padding-top: 12px;
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.total-value {
+    font-size: 18px;
+    color: #d946a6;
+}
+
+.place-order-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #e8b4d5;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.place-order-btn:hover {
+    background-color: #d946a6;
+    color: white;
+}
+
+/* Buy Confirmation Page Styles */
+.confirmation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+    padding: 40px 20px;
+}
+
+.confirmation-content {
+    text-align: center;
+    background-color: white;
+    border-radius: 15px;
+    padding: 60px 40px;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.reference-label {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.reference-number {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 30px;
+    letter-spacing: 0.5px;
+    font-family: 'Courier New', monospace;
+}
+
+.delivery-info-text {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.back-menu-btn {
+    padding: 15px 50px;
+    background-color: #e8b4d5;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-menu-btn:hover {
+    background-color: #d946a6;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-wrap: wrap;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .buying-container {
+        margin: 20px auto;
+    }
+
+    .buying-content {
+        padding: 15px;
+    }
+
+    .delivery-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .payment-buttons {
+        flex-direction: column;
+    }
+
+    .payment-btn {
+        min-width: auto;
+    }
+
+    .confirmation-content {
+        padding: 40px 20px;
+    }
+
+    .confirmation-title {
+        font-size: 24px;
+    }
+
+    .reference-number {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        gap: 10px;
+    }
+
+    .section-title {
+        font-size: 22px;
+    }
+
+    .items-table {
+        font-size: 12px;
+    }
+
+    .items-table th,
+    .items-table td {
+        padding: 8px;
+    }
+
+    .order-section {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+}
+>>>>>>> e8dfcca995769a0e565d3f0f7b54eec4c70ff3f6

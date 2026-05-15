@@ -34,9 +34,12 @@ if (bookingForm) {
 
 function generateBookingReference() {
   const prefix = 'ACDVOI';
-  const timestamp = Date.now().toString();
-  const randomDigits = Math.floor(Math.random() * 9000 + 1000).toString();
-  return `${prefix}-${timestamp.slice(-12)}${randomDigits}`;
+  // Generate random 10-digit number
+  let randomNumbers = '';
+  for (let i = 0; i < 10; i++) {
+    randomNumbers += Math.floor(Math.random() * 10);
+  }
+  return prefix + randomNumbers;
 }
 
 const calendarPopup = document.getElementById('calendarPopup');

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,3 +57,63 @@
     <script src="bc.js"></script>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - ArdCom</title>
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="bc.css">
+    <link rel="stylesheet" href="../cart-and-buy.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="site-header">
+        <a href="../../index.html" class="brand-logo">
+            <img src="../../Source Image/Landing/ardcom-logo.png" alt="ArdCom Electronics Logo" />
+        </a>
+
+        <div style="flex: 1; display: flex; justify-content: center;">
+            <div class="search-container" style="margin: 0; max-width: 600px; width: 100%;">
+                <div class="search-input-wrapper">
+                    <input type="text" id="mainSearchInput" placeholder="Search" autocomplete="off" />
+                    <button id="mainSearchBtn" class="search-button" aria-label="Search">&#128269;</button>
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navigation-links" aria-label="Primary navigation">
+            <a href="../../index.html">Home</a>
+            <a href="../Shopping.html">Shop</a>
+            <a href="../Booking/Booking.html">Book</a>
+            <a href="../About/about.html">About</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="header-action-button" aria-label="Shopping cart" onclick="window.location.href='../Shopping Cart.html'">&#128722;</button>
+            <button class="header-action-button" aria-label="User account" onclick="window.location.href='../Account/login.html'">&#128100;</button>
+        </div>
+    </header>
+
+    <!-- Confirmation Content -->
+    <div class="confirmation-container">
+        <div class="confirmation-content">
+            <h1 class="confirmation-title">You Successfully Ordered a product</h1>
+            <p class="reference-label">You're reference number is</p>
+            <p class="reference-number" id="referenceNumber">PHI2234526879I214</p>
+            
+            <p class="delivery-info-text">A delivery will take 6-10 days, depending on a place</p>
+            
+            <button class="back-menu-btn" onclick="backToMainMenu()">Back to Main Menu</button>
+        </div>
+    </div>
+
+    <script src="../cart-manager.js"></script>
+    <script src="../shared.js"></script>
+    <script src="bc.js"></script>
+</body>
+</html>
+>>>>>>> e8dfcca995769a0e565d3f0f7b54eec4c70ff3f6

@@ -1,4 +1,4 @@
-const API_BASE = '/api';
+const API_BASE = window.__API_URL__ || 'http://localhost:4000/api';
 const AUTH_TOKEN_KEY = 'ardcom_auth_token';
 const GUEST_CART_KEY = 'ardcom_guest_cart';
 

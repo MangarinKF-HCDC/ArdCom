@@ -1,0 +1,13 @@
+[build]
+  command = "npm run build"
+  publish = "."
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[context.production]
+  environment = {
+    REACT_APP_API_URL = "https://ardcom-backend.vercel.app/api"
+  }

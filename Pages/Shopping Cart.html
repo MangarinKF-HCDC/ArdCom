@@ -2,10 +2,266 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Cart - ArdCom Electronics</title>
+  <title>Shopping Cart - ArdCom Electronics</title>
   <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet" href="cart-and-buy.css" />
+  <style>
+    .cart-page {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .cart-container {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 30px;
+    }
+
+    .cart-items-section {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-title {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .cart-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .cart-table thead {
+      background-color: #f5f5f5;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .cart-table th {
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .cart-table td {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      vertical-align: middle;
+    }
+
+    .cart-item-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .item-checkbox {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .item-image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .item-details {
+      flex: 1;
+    }
+
+    .item-name {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .item-variation {
+      font-size: 12px;
+      color: #999;
+    }
+
+    .item-price {
+      font-weight: 600;
+      color: #333;
+      min-width: 100px;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 5px;
+    }
+
+    .quantity-control button {
+      background: none;
+      border: none;
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      color: #d946a6;
+    }
+
+    .quantity-control input {
+      width: 40px;
+      border: none;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .item-total {
+      font-weight: 600;
+      color: #333;
+      min-width: 100px;
+      text-align: right;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #d946a6;
+      cursor: pointer;
+      font-size: 20px;
+      padding: 5px;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+
+    .empty-cart-message {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .continue-shopping {
+      display: inline-block;
+      padding: 10px 30px;
+      background-color: #d946a6;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+
+    .continue-shopping:hover {
+      background-color: #c936a0;
+    }
+
+    .cart-summary-section {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .summary-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      color: #666;
+    }
+
+    .summary-row.total {
+      border-top: 2px solid #ddd;
+      padding-top: 15px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .summary-value {
+      font-weight: 600;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: #d946a6;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .checkout-btn:hover {
+      background-color: #c936a0;
+    }
+
+    .checkout-btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .select-all-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+
+    .select-all-checkbox input {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .select-all-checkbox label {
+      cursor: pointer;
+      font-weight: 600;
+      color: #333;
+    }
+
+    @media (max-width: 768px) {
+      .cart-container {
+        grid-template-columns: 1fr;
+      }
+
+      .cart-summary-section {
+        position: static;
+      }
+
+      .quantity-control input {
+        width: 30px;
+      }
+
+      .item-image {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Header Navigation -->
@@ -13,6 +269,16 @@
     <a href="../index.html" class="brand-logo">
       <img src="../Source Image/Landing/ardcom-logo.png" alt="ArdCom Electronics Logo" />
     </a>
+
+    <div style="flex: 1; display: flex; justify-content: center;">
+      <div class="search-container" style="margin: 0; max-width: 600px; width: 100%;">
+        <div class="search-input-wrapper">
+          <input type="text" id="mainSearchInput" placeholder="Search" autocomplete="off" />
+          <button id="mainSearchBtn" class="search-button" aria-label="Search">&#128269;</button>
+          <div class="search-suggestions" id="searchSuggestions"></div>
+        </div>
+      </div>
+    </div>
 
     <nav class="navigation-links" aria-label="Primary navigation">
       <a href="../index.html">Home</a>
@@ -22,76 +288,260 @@
     </nav>
 
     <div class="header-actions">
-      <button class="header-action-button active-cart" aria-label="Shopping cart" onclick="window.location.href='Shopping Cart.html'">🛒</button>
-      <button class="header-action-button" aria-label="User account" onclick="window.location.href='Account/login.html'">👤</button>
+      <button class="header-action-button" aria-label="Shopping cart" onclick="window.location.href='Shopping Cart.html'">&#128722;</button>
+      <button class="header-action-button" aria-label="User account" onclick="window.location.href='Account/login.html'">&#128100;</button>
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main Cart Content -->
   <main class="cart-page">
     <div class="cart-container">
-      <!-- Cart Items Section -->
-      <section class="cart-items-section">
-        <h1 class="cart-title">Your Cart</h1>
+      <!-- Cart Items -->
+      <div class="cart-items-section">
+        <h1 class="cart-title">Shopping Cart</h1>
         
-        <!-- Cart Items List -->
-        <div id="cart-items-list" class="cart-items-list">
-          <!-- Cart items will be dynamically inserted here -->
-        </div>
-
-        <!-- Empty Cart Message -->
-        <div id="empty-cart-message" class="empty-cart-message" style="display: none;">
-          <p>Your cart is empty</p>
-          <a href="Shopping.html" class="continue-shopping-btn">Continue Shopping</a>
-        </div>
-      </section>
-
-      <!-- Cart Summary Section -->
-      <section class="cart-summary-section">
-        <!-- Platform Vouchers -->
-        <div class="vouchers-container">
-          <label for="platform-vouchers">Platform Vouchers:</label>
-          <input 
-            type="text" 
-            id="platform-vouchers" 
-            class="vouchers-input" 
-            placeholder="Enter voucher code"
-            aria-label="Platform vouchers code"
-          />
-          <button id="apply-voucher-btn" class="apply-voucher-btn">Apply</button>
-        </div>
-
-        <!-- Summary Information -->
-        <div class="summary-info">
-          <div class="summary-row">
-            <span class="summary-label">Items Selected:</span>
-            <span id="items-count" class="summary-value">0</span>
-          </div>
-          <div class="summary-row total-row">
-            <span class="summary-label">Total:</span>
-            <span id="total-price" class="summary-value">₱ 00.00</span>
+        <div id="selectAllContainer" style="display: none;">
+          <div class="select-all-checkbox">
+            <input type="checkbox" id="selectAllCheckbox" onchange="toggleSelectAll(this.checked)">
+            <label for="selectAllCheckbox">Select All Items</label>
           </div>
         </div>
 
-        <!-- Cart Actions -->
-        <div class="cart-actions">
-          <div class="checkbox-group">
-            <input type="checkbox" id="select-all-checkbox" aria-label="Select all items" />
-            <label for="select-all-checkbox" class="select-all-label">Select all</label>
-            <button id="delete-selected-btn" class="delete-btn" aria-label="Delete selected items">Delete</button>
-          </div>
-
-          <button id="checkout-btn" class="checkout-btn" aria-label="Proceed to checkout">Check Out!</button>
+        <div id="cartItemsContainer">
+          <!-- Cart items will be populated here -->
         </div>
-      </section>
+      </div>
+
+      <!-- Cart Summary -->
+      <div class="cart-summary-section">
+        <h3 class="summary-title">Order Summary</h3>
+        
+        <div class="summary-row">
+          <span>Items Selected:</span>
+          <span class="summary-value" id="selectedItemsCount">0</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span class="summary-value">₱ <span id="subtotalAmount">0.00</span></span>
+        </div>
+
+        <div class="summary-row">
+          <span>Shipping:</span>
+          <span class="summary-value">₱ <span id="shippingAmount">0.00</span></span>
+        </div>
+
+        <div class="summary-row total">
+          <span>Total:</span>
+          <span>₱ <span id="totalAmount">0.00</span></span>
+        </div>
+
+        <button class="checkout-btn" id="checkoutBtn" onclick="proceedToCheckout()" disabled>
+          Proceed to Checkout
+        </button>
+
+        <button class="checkout-btn" id="deleteSelectedBtn" onclick="deleteSelectedItems()" disabled style="background-color: #dc2626; margin-top: 10px;">
+          Delete Selected Items
+        </button>
+
+        <button class="continue-shopping" onclick="window.location.href='Shopping.html'" style="width: 100%; text-align: center; margin-top: 10px;">
+          Continue Shopping
+        </button>
+      </div>
     </div>
   </main>
 
+  <script src="cart-manager.js"></script>
+  <script src="../script.js"></script>
+  <script src="shared.js"></script>
+  <script>
+    // Load and display cart items
+    function loadCartDisplay() {
+      const container = document.getElementById('cartItemsContainer');
+      const items = cartManager.getItems();
 
-  <!-- Scripts -->
-  <script src="../script.js" defer></script>
-  <script src="api-client.js" defer></script>
-  <script src="shared.js" defer></script>
-  <script src="cart-and-buy.js"></script>
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="empty-cart">
+            <div class="empty-cart-message">Your cart is empty</div>
+            <button class="continue-shopping" onclick="window.location.href='Shopping.html'">Start Shopping</button>
+          </div>
+        `;
+        document.getElementById('selectAllContainer').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('selectAllContainer').style.display = 'block';
+
+      container.innerHTML = `
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th style="width: 40px;"></th>
+              <th>Product</th>
+              <th>Unit Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th style="width: 50px;"></th>
+            </tr>
+          </thead>
+          <tbody id="cartTableBody">
+          </tbody>
+        </table>
+      `;
+
+      const tbody = document.getElementById('cartTableBody');
+      items.forEach(item => {
+        const row = document.createElement('tr');
+        const itemTotal = item.price * item.quantity;
+
+        row.innerHTML = `
+          <td>
+            <input type="checkbox" class="item-checkbox" data-item-id="${item.id}" 
+                   onchange="updateSelection()" ${item.selected ? 'checked' : ''}>
+          </td>
+          <td>
+            <div class="cart-item-row">
+              <img src="../${item.image}" alt="${item.name}" class="item-image" onerror="this.src='../Source Image/Landing/placeholder.jpg'">
+              <div class="item-details">
+                <div class="item-name">${item.name}</div>
+                <div class="item-variation">${item.variation}</div>
+              </div>
+            </div>
+          </td>
+          <td class="item-price">₱ ${item.price.toFixed(2)}</td>
+          <td>
+            <div class="quantity-control">
+              <button onclick="updateItemQuantity('${item.id}', -1)">−</button>
+              <input type="number" value="${item.quantity}" readonly>
+              <button onclick="updateItemQuantity('${item.id}', 1)">+</button>
+            </div>
+          </td>
+          <td class="item-total">₱ ${itemTotal.toFixed(2)}</td>
+          <td>
+            <button class="remove-btn" onclick="removeItem('${item.id}')" title="Remove">×</button>
+          </td>
+        `;
+
+        tbody.appendChild(row);
+      });
+
+      updateSummary();
+    }
+
+    // Update item selection
+    function updateSelection() {
+      const checkboxes = document.querySelectorAll('.item-checkbox');
+      checkboxes.forEach(checkbox => {
+        const itemId = checkbox.dataset.itemId;
+        const item = cartManager.cart.items.find(i => i.id === itemId);
+        if (item) {
+          item.selected = checkbox.checked;
+        }
+      });
+      cartManager.saveCart();
+      updateSummary();
+    }
+
+    // Toggle select all
+    function toggleSelectAll(checked) {
+      const checkboxes = document.querySelectorAll('.item-checkbox');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = checked;
+        const itemId = checkbox.dataset.itemId;
+        const item = cartManager.cart.items.find(i => i.id === itemId);
+        if (item) {
+          item.selected = checked;
+        }
+      });
+      cartManager.saveCart();
+      updateSummary();
+    }
+
+    // Update item quantity
+    function updateItemQuantity(itemId, change) {
+      const item = cartManager.cart.items.find(i => i.id === itemId);
+      if (item) {
+        item.quantity = Math.max(1, item.quantity + change);
+        cartManager.saveCart();
+        loadCartDisplay();
+      }
+    }
+
+    // Remove item from cart
+    function removeItem(itemId) {
+      if (confirm('Remove this item from cart?')) {
+        cartManager.removeFromCart(itemId);
+        loadCartDisplay();
+      }
+    }
+
+    // Update summary
+    function updateSummary() {
+      const items = cartManager.getItems();
+      const selectedItems = items.filter(item => item.selected);
+      const selectedCount = selectedItems.reduce((sum, item) => sum + item.quantity, 0);
+      const subtotal = selectedItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+      document.getElementById('selectedItemsCount').textContent = selectedCount;
+      document.getElementById('subtotalAmount').textContent = subtotal.toFixed(2);
+      document.getElementById('totalAmount').textContent = subtotal.toFixed(2);
+
+      const checkoutBtn = document.getElementById('checkoutBtn');
+      checkoutBtn.disabled = selectedItems.length === 0;
+
+      const deleteBtn = document.getElementById('deleteSelectedBtn');
+      deleteBtn.disabled = selectedItems.length === 0;
+
+      // Update select all checkbox state
+      const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+      if (selectAllCheckbox) {
+        const allChecked = items.length > 0 && items.every(item => item.selected);
+        const someChecked = items.some(item => item.selected);
+        selectAllCheckbox.checked = allChecked;
+        selectAllCheckbox.indeterminate = someChecked && !allChecked;
+      }
+    }
+
+    // Delete selected items
+    function deleteSelectedItems() {
+      const items = cartManager.getItems();
+      const selectedItems = items.filter(item => item.selected);
+
+      if (selectedItems.length === 0) {
+        alert('Please select at least one item to delete');
+        return;
+      }
+
+      if (confirm(`Delete ${selectedItems.length} selected item(s)?`)) {
+        selectedItems.forEach(item => {
+          cartManager.removeFromCart(item.id);
+        });
+        loadCartDisplay();
+      }
+    }
+
+    // Proceed to checkout
+    function proceedToCheckout() {
+      const items = cartManager.getItems();
+      const selectedItems = items.filter(item => item.selected);
+
+      if (selectedItems.length === 0) {
+        alert('Please select at least one item to checkout');
+        return;
+      }
+
+      // Save selected items to separate storage for buying page
+      localStorage.setItem('checkoutItems', JSON.stringify(selectedItems));
+
+      // Redirect to buying page
+      window.location.href = 'Buy and Confirmation/buying.html';
+    }
+
+    // Initialize cart display
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCartDisplay();
+    });
+  </script>
 </body>
 </html>
