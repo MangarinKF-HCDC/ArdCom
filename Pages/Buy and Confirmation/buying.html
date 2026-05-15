@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Order - ArdCom</title>
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="bc.css">
+    <link rel="stylesheet" href="../cart-and-buy.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="site-header">
+        <a href="../../index.html" class="brand-logo">
+            <img src="../../Source Image/Landing/ardcom-logo.png" alt="ArdCom Electronics Logo" />
+        </a>
+
+        <div style="flex: 1; display: flex; justify-content: center;">
+            <div class="search-container" style="margin: 0; max-width: 600px; width: 100%;">
+                <div class="search-input-wrapper">
+                    <input type="text" id="mainSearchInput" placeholder="Search" autocomplete="off" />
+                    <button id="mainSearchBtn" class="search-button" aria-label="Search">&#128269;</button>
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navigation-links" aria-label="Primary navigation">
+            <a href="../../index.html">Home</a>
+            <a href="../Shopping.html">Shop</a>
+            <a href="../Booking/Booking.html">Book</a>
+            <a href="../About/about.html">About</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="header-action-button" aria-label="Shopping cart" onclick="window.location.href='../Shopping Cart.html'">&#128722;</button>
+            <button class="header-action-button" aria-label="User account" onclick="window.location.href='../Account/login.html'">&#128100;</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="buying-container">
+        <div class="buying-content">
+            <h1 class="section-title">Your Order</h1>
+
+            <!-- Delivery Address Section -->
+            <div class="order-section delivery-address-box">
+                <div class="section-header">
+                    <h2>Delivery Address</h2>
+                </div>
+                <div class="delivery-info">
+                    <div class="address-details">
+                        <p class="customer-name" id="customerName">Juan Dela Cruz</p>
+                        <p class="customer-phone" id="customerPhone">09008184444</p>
+                        <p class="customer-address" id="customerAddress">Ang address namin na mataas, Building Namin, Syudad ng babaw, Davao del Sur, Mindanao, Pilipinas, 8000</p>
+                    </div>
+                    <button class="change-btn" onclick="editDeliveryAddress()">Change</button>
+                </div>
+            </div>
+
+            <!-- Items Ordered Section -->
+            <div class="order-section items-ordered-box">
+                <div class="section-header">
+                    <h2>Items Ordered</h2>
+                </div>
+                <div class="items-table-container">
+                    <table class="items-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Unit Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="itemsTableBody">
+                            <!-- Items will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Shipping Options Section -->
+            <div class="order-section shipping-options-box">
+                <label for="shippingOptions" class="shipping-label">Shipping Options:</label>
+                <select id="shippingOptions" class="shipping-select" onchange="updateOrderTotal()">
+                    <option value="standard">Standard Shipping (5-7 days) - Free</option>
+                    <option value="express">Express Shipping (2-3 days) - ₱250</option>
+                    <option value="overnight">Overnight Shipping - ₱500</option>
+                </select>
+            </div>
+
+            <!-- Order Total Section -->
+            <div class="order-section order-total-box">
+                <p class="item-count">Order Total (<span id="itemCount">0</span> of item/s):</p>
+                <p class="total-amount">₱ <span id="totalAmount">00.00</span></p>
+            </div>
+
+            <!-- Payment Methods Section -->
+            <div class="order-section payment-methods-box">
+                <h3>Payment Methods</h3>
+                <div class="payment-buttons">
+                    <button class="payment-btn" onclick="selectPayment('cash', this)">Cash</button>
+                    <button class="payment-btn" onclick="selectPayment('gcash', this)">G-Cash</button>
+                    <button class="payment-btn" onclick="selectPayment('maya', this)">Maya</button>
+                    <button class="payment-btn" onclick="selectPayment('card', this)">Card</button>
+                </div>
+            </div>
+
+            <!-- Payment Summary Section -->
+            <div class="order-section payment-summary-box">
+                <div class="summary-row">
+                    <span>Merchandise Subtotal:</span>
+                    <span class="summary-value">₱ <span id="merchandiseSubtotal">00.00</span></span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping Subtotal:</span>
+                    <span class="summary-value">₱ <span id="shippingSubtotal">00.00</span></span>
+                </div>
+                <div class="summary-row">
+                    <span>Voucher Subtotal:</span>
+                    <span class="summary-value">₱ <span id="voucherSubtotal">0.00</span></span>
+                </div>
+                <div class="summary-row total-row">
+                    <span>Total Payment:</span>
+                    <span class="summary-value total-value">₱ <span id="totalPayment">00.00</span></span>
+                </div>
+                <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../cart-manager.js"></script>
+    <script src="../shared.js"></script>
+    <script src="bc.js"></script>
+</body>
+</html>
